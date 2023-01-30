@@ -56,7 +56,7 @@ INCLUDES				:= -I$(LIBFT_HEADERS) -I$(LIBPRINTF_HEADERS) -I$(INCLUDE_DIR) $(LINU
 
 SOURCES_DIRECTORY		:= ./sources/
 SOURCES_LIST			:= main.c
-HEADER_LIST				:= push_swap.h
+HEADER_LIST				:= pipex.h
 HEADER_FILES			:= $(addprefix $(INCLUDE_DIR), $(HEADER_LIST))
 
 OBJECTS_DIRECTORY		:= objects/
@@ -93,7 +93,7 @@ clean:
 	rm -rf *.dSYM
 
 
-clean_ps:
+clean_pipex:
 	rm -rf $(OBJECTS_DIRECTORY)
 	rm -rf *.dSYM
 
@@ -114,7 +114,7 @@ docker_clean:
 
 re: fclean all
 
-re_ps: clean_ps all
+re_pipex: clean_pipex all
 
 norm:
 	norminette includes/ sources/ libs/libft/ libs/libprintf/ 
