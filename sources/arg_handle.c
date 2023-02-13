@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   arg_handle.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwikiera <jwikiera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,34 +10,35 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "pipex.h"
 
-# ifdef LINUX
-# else
-# endif
-
-# include "stdlib.h"
-# include "stdio.h"
-# include "unistd.h"
-# include "string.h"
-# include "fcntl.h"
-
-# include <libft.h>
-# include <ft_printf.h>
-
-typedef struct s_pipex
+int	heredoc_arg_handle(int argc, char *argv[], t_pipex *pipex)
 {
-	char	**heredoc_args;
-	size_t	heredoc_argc;
-	int		file1_fd;
-	int		file2_fd;
-	char	**commands;
-	size_t	commandc;
-}	t_pipex;
+	(void) argc;
+	(void) argv;
+	(void) pipex;
+	return (1);
+}
 
-t_pipex	*init_pipex();
-void	free_pipex(t_pipex *pipex);
-int		arg_handle(int argc, char *argv[], t_pipex *pipex);
+int	pipe_arg_handle(int argc, char *argv[], t_pipex *pipex)
+{
+	(void) argc;
+	(void) argv;
+	(void) pipex;
 
-#endif
+
+
+	return (1);
+}
+
+int	arg_handle(int argc, char *argv[], t_pipex *pipex)
+{
+	if (argc < 5)
+	{
+		ft_putstr_fd("At least four arguments expected.\n", 2);
+		return (0);
+	}
+	if (!ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])))
+		return (heredoc_arg_handle(argc, argv, pipex));
+	return (pipe_arg_handle(argc, argv, pipex));
+}

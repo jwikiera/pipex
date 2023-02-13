@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   init.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwikiera <jwikiera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,34 +10,34 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "pipex.h"
 
-# ifdef LINUX
-# else
-# endif
-
-# include "stdlib.h"
-# include "stdio.h"
-# include "unistd.h"
-# include "string.h"
-# include "fcntl.h"
-
-# include <libft.h>
-# include <ft_printf.h>
-
-typedef struct s_pipex
+t_pipex	*init_pipex()
 {
-	char	**heredoc_args;
-	size_t	heredoc_argc;
-	int		file1_fd;
-	int		file2_fd;
-	char	**commands;
-	size_t	commandc;
-}	t_pipex;
+	t_pipex	*res;
 
-t_pipex	*init_pipex();
-void	free_pipex(t_pipex *pipex);
-int		arg_handle(int argc, char *argv[], t_pipex *pipex);
+	res = malloc(sizeof(*res));
+	if (!res)
+		return (NULL);
+	res->heredoc_args = NULL;
+	res->heredoc_argc = 0;
+	res->file1_fd = -1;
+	res->file2_fd = -1;
+	res->commands = NULL;
+	res->commandc = 0;
+	return (res);
+}
 
-#endif
+/* pipex->commands is a 2d char array but individual strings are also in argv
+ * and should be freed by the OS */
+void	free_pipex(t_pipex *pipex)
+{
+	int	i;
+
+	if (pipex && pipex->heredoc_args)
+		free(pipex->heredoc_args);
+	if (pipex && pipex->commands)
+		free(pipex->commands);
+	if (pipex)
+		free(pipex);
+}

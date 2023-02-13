@@ -55,7 +55,10 @@ LIBRARIES				:= -lftprintf -lft -L. -L$(LIBFT_DIRECTORY) -L$(LIBPRINTF_DIRECTORY
 INCLUDES				:= -I$(LIBFT_HEADERS) -I$(LIBPRINTF_HEADERS) -I$(INCLUDE_DIR) $(LINUX_INCLUDES)
 
 SOURCES_DIRECTORY		:= ./sources/
-SOURCES_LIST			:= main.c
+SOURCES_LIST			:= main.c\
+							init.c\
+							arg_handle.c\
+							handle_files.c
 HEADER_LIST				:= pipex.h
 HEADER_FILES			:= $(addprefix $(INCLUDE_DIR), $(HEADER_LIST))
 

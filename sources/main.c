@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/* ******4******************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
@@ -14,19 +14,30 @@
 
 extern char **environ;
 
+void	handle_exit(char *msg, int code, t_pipex *pipex)
+{
+	if (pipex)
+		free_pipex(pipex);
+	if (msg)
+	{
+		if (code == 0)
+			ft_putstr_fd(msg, 1);
+		else
+			ft_putstr_fd(msg, 2);
+	}
+	exit(code);
+}
+
 int	main(int argc, char *argv[])
 {
-	int	i;
-	(void) argc;
-	(void) argv;
-	ft_printf("hello\n");
-	i = 0;
-	while (environ[i])
-	{
-		ft_printf("environ[%d]: %s\n", i, environ[i]);
-		i ++;
-	}
-	ft_printf("strerror 69 is %s\n", strerror(69));
-	ft_printf("strerror 420 is %s\n", strerror(420));
+	t_pipex	*pipex;
+
+	pipex = init_pipex();
+	if (!pipex)
+		handle_exit("Failed to initialize pipex struct\n", 1, NULL);
+	if (!arg_handle(argc, argv, pipex))
+		handle_exit("Invalid arguments\n", 2, pipex);
+
+
 	return (0);
 }

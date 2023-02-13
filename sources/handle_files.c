@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   handle_files.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwikiera <jwikiera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,34 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "pipex.h"
 
-# ifdef LINUX
-# else
-# endif
-
-# include "stdlib.h"
-# include "stdio.h"
-# include "unistd.h"
-# include "string.h"
-# include "fcntl.h"
-
-# include <libft.h>
-# include <ft_printf.h>
-
-typedef struct s_pipex
+int	fd_file1(const char *fname)
 {
-	char	**heredoc_args;
-	size_t	heredoc_argc;
-	int		file1_fd;
-	int		file2_fd;
-	char	**commands;
-	size_t	commandc;
-}	t_pipex;
+	int	res;
 
-t_pipex	*init_pipex();
-void	free_pipex(t_pipex *pipex);
-int		arg_handle(int argc, char *argv[], t_pipex *pipex);
-
-#endif
+	if (!fname)
+		return (-1);
+	res = open(fname, O_RDONLY);
+	return (-1);
+}
