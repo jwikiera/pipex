@@ -14,7 +14,7 @@
 
 void	handle_pipes(t_pipex *pipex)
 {
-	int	*fd_reg;
+	//int	*fd_reg;
 
 	ft_printf("handling pipes or smth lol (%x)\n", pipex);
 

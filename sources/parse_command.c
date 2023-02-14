@@ -12,7 +12,5 @@
 
 #include "pipex.h"
 
-/*
- * Here, it will be just a split.
- * To handle awk-like commands, we would need additional quotes
- * */
+
+

@@ -106,8 +106,8 @@ clean_pipex:
 
 
 fclean: clean
-	$(MAKE) -sC $(LIBFT_DIRECTORY) clean
-	$(MAKE) -sC $(LIBPRINTF_DIRECTORY) clean
+	$(MAKE) -sC $(LIBFT_DIRECTORY) fclean
+	$(MAKE) -sC $(LIBPRINTF_DIRECTORY) fclean
 	rm -f $(NAME)
 
 docker_build:
