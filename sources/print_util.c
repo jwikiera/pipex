@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                            :+:      :+:    :+:   */
+/*   print_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwikiera <jwikiera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,31 +12,27 @@
 
 #include "pipex.h"
 
-t_pipex	*init_pipex()
+int	print_pipex(t_pipex *pipex)
 {
-	t_pipex	*res;
-
-	res = malloc(sizeof(*res));
-	if (!res)
-		return (NULL);
-	res->is_heredoc = 0;
-	res->heredoc_args = NULL;
-	res->heredoc_argc = 0;
-	res->file1_fd = -1;
-	res->file2_fd = -1;
-	res->commands = NULL;
-	res->commandc = 0;
-	return (res);
-}
-
-/* pipex->commands is a 2d char array but individual strings are also in argv
- * and should be freed by the OS */
-void	free_pipex(t_pipex *pipex)
-{
-	if (pipex && pipex->heredoc_args)
-		free(pipex->heredoc_args);
-	if (pipex && pipex->commands)
-		free(pipex->commands);
-	if (pipex)
-		free(pipex);
+	if (!ft_printf("pipex struct @%x\n", pipex))
+		return (0);
+	if (!ft_printf("file1_fd: %d\n", pipex->file1_fd))
+		return (0);
+	if (!ft_printf("file2_fd: %d\n", pipex->file2_fd))
+		return (0);
+	if (!ft_printf("commands: "))
+		return (0);
+	if (!ft_print_strarr(pipex->commands, pipex->commandc, 0))
+		return (0);
+	if (!ft_printf("\ncommandc: %d\n", pipex->commandc))
+		return (0);
+	if (!ft_printf("is_heredoc: %d\n", pipex->is_heredoc))
+		return (0);
+	if (!ft_printf("heredoc_args: "))
+		return (0);
+	if (!ft_print_strarr(pipex->heredoc_args, pipex->heredoc_argc, 0))
+		return (0);
+	if (!ft_printf("\nheredoc_argc: %d\n", pipex->heredoc_argc))
+		return (0);
+	return (1);
 }

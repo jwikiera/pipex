@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                            :+:      :+:    :+:   */
+/*   ft_print_strarr.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwikiera <jwikiera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,33 +10,47 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-t_pipex	*init_pipex()
+static int	print_empty()
 {
-	t_pipex	*res;
-
-	res = malloc(sizeof(*res));
-	if (!res)
-		return (NULL);
-	res->is_heredoc = 0;
-	res->heredoc_args = NULL;
-	res->heredoc_argc = 0;
-	res->file1_fd = -1;
-	res->file2_fd = -1;
-	res->commands = NULL;
-	res->commandc = 0;
-	return (res);
+	if (!ft_ptstrfd_s("NULL PTR", 1))
+		return (0);
+	return (1);
 }
 
-/* pipex->commands is a 2d char array but individual strings are also in argv
- * and should be freed by the OS */
-void	free_pipex(t_pipex *pipex)
+static size_t	len_from_null_terminated(char **arr)
 {
-	if (pipex && pipex->heredoc_args)
-		free(pipex->heredoc_args);
-	if (pipex && pipex->commands)
-		free(pipex->commands);
-	if (pipex)
-		free(pipex);
+	size_t	len;
+
+	len = 0;
+	while (arr[len])
+		len ++;
+	return (len);
+}
+
+int	ft_print_strarr(char **arr, size_t len, int null_terminated)
+{
+	size_t	i;
+	if (!arr)
+		return (print_empty());
+	if (null_terminated)
+		len = len_from_null_terminated(arr);
+	if (!ft_ptstrfd_s("[", 1))
+		return (0);
+	i = 0;
+	while (i < len)
+	{
+		if (!ft_ptstrfd_s(arr[i], 1))
+			return (0);
+		if (i < len - 1)
+		{
+			if (!ft_ptstrfd_s(", ", 1))
+				return (0);
+		}
+		i ++;
+	}
+	if (!ft_ptstrfd_s("]", 1))
+		return (0);
+	return (1);
 }

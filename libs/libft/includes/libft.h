@@ -90,6 +90,8 @@ void		ft_free_split(char **split_res, size_t size);
 int			ft_index_of_int(const int *arr, int size, int target);
 int			ft_array_is_sorted(const int *arr, size_t len);
 int			*ft_intarr_bubblesort(const int *arr, size_t len);
+ssize_t		ft_ptstrfd_s(char *s, int fd);
+int			ft_print_strarr(char **arr, size_t len, int null_terminated);
 
 /* math */
 int			ft_min_int(int a, int b);

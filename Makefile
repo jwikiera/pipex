@@ -58,7 +58,11 @@ SOURCES_DIRECTORY		:= ./sources/
 SOURCES_LIST			:= main.c\
 							init.c\
 							arg_handle.c\
-							handle_files.c
+							handle_files.c\
+							print_util.c\
+							pipe_handler.c\
+							heredoc_handler.c\
+							parse_command.c
 HEADER_LIST				:= pipex.h
 HEADER_FILES			:= $(addprefix $(INCLUDE_DIR), $(HEADER_LIST))
 

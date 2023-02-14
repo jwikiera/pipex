@@ -14,6 +14,7 @@
 
 int	heredoc_arg_handle(int argc, char *argv[], t_pipex *pipex)
 {
+	pipex->is_heredoc = 1;
 	(void) argc;
 	(void) argv;
 	(void) pipex;
@@ -22,12 +23,26 @@ int	heredoc_arg_handle(int argc, char *argv[], t_pipex *pipex)
 
 int	pipe_arg_handle(int argc, char *argv[], t_pipex *pipex)
 {
-	(void) argc;
-	(void) argv;
-	(void) pipex;
+	int	i;
 
-
-
+	if (!handle_files(argv[1], argv[argc - 1], pipex))
+	{
+		ft_putstr_fd("Failed to open files.\n", 2);
+		return (0);
+	}
+	pipex->commands = malloc(sizeof(*pipex->commands) * argc - 3);
+	if (!pipex->commands)
+	{
+		ft_putstr_fd("Failed to malloc pipex->commands.\n", 2);
+		return (0);
+	}
+	i = 2;
+	while (i < argc - 1)
+	{
+		pipex->commands[i - 2] = argv[i];
+		i ++;
+	}
+	pipex->commandc = argc - 3;
 	return (1);
 }
 
