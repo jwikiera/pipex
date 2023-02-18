@@ -39,7 +39,9 @@ int	pipe_arg_handle(int argc, char *argv[], t_pipex *pipex)
 	i = 2;
 	while (i < argc - 1)
 	{
-		pipex->commands[i - 2] = argv[i];
+		pipex->commands[i - 2] = parse_command(argv[i]);
+		if (!pipex->commands[i - 2])
+			return (0);
 		i ++;
 	}
 	pipex->commandc = argc - 3;

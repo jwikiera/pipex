@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_strarr.c                                  :+:      :+:    :+:   */
+/*   ft_tlst_to_strarr.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwikiera <jwikiera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,46 +12,38 @@
 
 #include "libft.h"
 
-static int	print_empty(void)
+static char	**create_arr(t_list *lst)
 {
-	if (!ft_ptstrfd_s("NULL PTR", 1))
-		return (0);
-	return (1);
-}
-
-static size_t	len_from_null_terminated(char **arr)
-{
-	size_t	len;
-
-	len = 0;
-	while (arr[len])
-		len ++;
-	return (len);
-}
-
-int	ft_print_strarr(char **arr, size_t len, int null_terminated)
-{
+	t_list	*iter;
 	size_t	i;
+	char	**res;
 
-	if (!arr)
-		return (print_empty());
-	if (null_terminated)
-		len = len_from_null_terminated(arr);
-	if (!ft_ptstrfd_s("[", 1))
-		return (0);
+	res = malloc(sizeof(*res) * (ft_lstsize(lst) + 1));
+	if (!res)
+		return (NULL);
+	iter = lst;
 	i = 0;
-	while (i < len)
+	while (iter)
 	{
-		if (!ft_ptstrfd_s(arr[i], 1))
-			return (0);
-		if (i < len - 1)
+		res[i] = malloc(sizeof(**res) * (ft_strlen(iter->content) + 1));
+		if (!res[i])
 		{
-			if (!ft_ptstrfd_s(", ", 1))
-				return (0);
+			ft_free_split(res, i);
+			return (NULL);
 		}
+		ft_strlcpy(res[i], iter->content, ft_strlen(iter->content) + 1);
+		iter = iter->next;
 		i ++;
 	}
-	if (!ft_ptstrfd_s("]", 1))
-		return (0);
-	return (1);
+	res[i] = NULL;
+	return (res);
+}
+
+char	**ft_tlst_to_strarr(t_list *lst)
+{
+	if (!lst)
+		return (NULL);
+	if (ft_lstsize(lst) == 0)
+		return (NULL);
+	return (create_arr(lst));
 }

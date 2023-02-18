@@ -33,11 +33,11 @@ typedef struct s_pipex
 	size_t	heredoc_argc;
 	int		file1_fd;
 	int		file2_fd;
-	char	**commands;
+	char	***commands;
 	size_t	commandc;
 }	t_pipex;
 
-t_pipex	*init_pipex();
+t_pipex	*init_pipex(void);
 void	free_pipex(t_pipex *pipex);
 int		arg_handle(int argc, char *argv[], t_pipex *pipex);
 int		fd_file1(const char *fname);
@@ -46,5 +46,7 @@ int		handle_files(const char *fname1, const char *fname2, t_pipex *pipex);
 int		print_pipex(t_pipex *pipex);
 void	handle_pipes(t_pipex *pipex);
 void	handle_heredoc(t_pipex *pipex);
+char	**parse_command(char *command);
+void	pipex_del_node(void *content);
 
 #endif

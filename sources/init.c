@@ -12,7 +12,7 @@
 
 #include "pipex.h"
 
-t_pipex	*init_pipex()
+t_pipex	*init_pipex(void)
 {
 	t_pipex	*res;
 
@@ -33,10 +33,20 @@ t_pipex	*init_pipex()
  * and should be freed by the OS */
 void	free_pipex(t_pipex *pipex)
 {
+	size_t	i;
 	if (pipex && pipex->heredoc_args)
 		free(pipex->heredoc_args);
 	if (pipex && pipex->commands)
+	{
+		i = 0;
+		while (i < pipex->commandc)
+		{
+			if (pipex->commands[i])
+				ft_free_split(pipex->commands[i], ft_strarrlen(pipex->commands[i]));
+			i ++;
+		}
 		free(pipex->commands);
+	}
 	if (pipex)
 		free(pipex);
 }

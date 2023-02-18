@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   del_node.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwikiera <jwikiera@student.42lausan>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,44 +12,7 @@
 
 #include "pipex.h"
 
-extern char **environ;
-
-void	handle_exit(char *msg, int code, t_pipex *pipex)
+void	pipex_del_node(void *content)
 {
-	if (pipex)
-		free_pipex(pipex);
-	if (msg)
-	{
-		if (code == 0)
-			ft_putstr_fd(msg, 1);
-		else
-			ft_putstr_fd(msg, 2);
-	}
-	exit(code);
-}
-
-int	main(int argc, char *argv[])
-{
-	t_pipex	*pipex;
-
-	pipex = init_pipex();
-	print_pipex(pipex);
-	if (!pipex)
-		handle_exit("Failed to initialize pipex struct\n", 1, NULL);
-	if (!arg_handle(argc, argv, pipex))
-		handle_exit("Invalid arguments\n", 2, pipex);
-	print_pipex(pipex);
-	if (pipex->is_heredoc)
-		handle_heredoc(pipex);
-	else
-		handle_pipes(pipex);
-
-	/*char **test = parse_command(pipex->commands[0]);
-	ft_printf("test: ");
-	ft_print_strarr(test, 0, 1);
-	ft_printf("\n");*/
-
-	handle_exit(NULL, 0, pipex);
-
-	return (0);
+	free(content);
 }

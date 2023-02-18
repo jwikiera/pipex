@@ -12,6 +12,25 @@
 
 #include "pipex.h"
 
+static int	print_commands(t_pipex *pipex)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < pipex->commandc)
+	{
+		if (!ft_print_strarr(pipex->commands[i], 0, 1))
+			return (0);
+		if (i < pipex->commandc - 1)
+		{
+			if (!ft_printf(" "))
+				return (0);
+		}
+		i ++;
+	}
+	return (1);
+}
+
 int	print_pipex(t_pipex *pipex)
 {
 	if (!ft_printf("pipex struct @%x\n", pipex))
@@ -22,7 +41,7 @@ int	print_pipex(t_pipex *pipex)
 		return (0);
 	if (!ft_printf("commands: "))
 		return (0);
-	if (!ft_print_strarr(pipex->commands, pipex->commandc, 0))
+	if (!print_commands(pipex))
 		return (0);
 	if (!ft_printf("\ncommandc: %d\n", pipex->commandc))
 		return (0);

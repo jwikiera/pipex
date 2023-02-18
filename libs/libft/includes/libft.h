@@ -92,6 +92,9 @@ int			ft_array_is_sorted(const int *arr, size_t len);
 int			*ft_intarr_bubblesort(const int *arr, size_t len);
 ssize_t		ft_ptstrfd_s(char *s, int fd);
 int			ft_print_strarr(char **arr, size_t len, int null_terminated);
+char		**ft_tlst_to_strarr(t_list *lst);
+size_t		ft_strarrlen(char **strarr);
+int			ft_isblankstr(const char *str);
 
 /* math */
 int			ft_min_int(int a, int b);

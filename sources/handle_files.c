@@ -54,4 +54,3 @@ int	handle_files(const char *fname1, const char *fname2, t_pipex *pipex)
 	}
 	return (1);
 }
-

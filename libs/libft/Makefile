@@ -98,7 +98,10 @@ SRCS_OWN_LIST		:= ft_str_starts_ends_with.c\
 						ft_array_is_sorted.c\
 						ft_intarr_bubblesort.c\
 						ft_ptstrfd_s.c\
-						ft_print_strarr.c
+						ft_print_strarr.c\
+						ft_tlst_to_strarr.c\
+						ft_strarrlen.c\
+						ft_isblankstr.c
 OBJS_OWN_LIST		:= $(patsubst %.c, %.o, $(SRCS_OWN_LIST))
 OBJS_OWN			:= $(addprefix $(OBJECTS_DIRECTORY), $(OBJS_OWN_LIST))
 

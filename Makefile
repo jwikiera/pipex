@@ -29,13 +29,15 @@ else
 endif
 
 ifdef DEBUG
-	DEVFLAGS			:= -ggdb -O0 $(FSANITIZE)
+	DEVFLAGS			:= -ggdb $(FSANITIZE)
+	OPTFLAG				:= -O0
 else
 	DEVFLAGS			:=
+	OPTFLAG				:= -O3
 endif
 
 CC						:= cc
-CFLAGS					:= -Wall -Wextra -Werror -pedantic -O3 $(DEVFLAGS) $(OS_FLAG)
+CFLAGS					:= -Wall -Wextra -Werror -pedantic $(OPTFLAG) $(DEVFLAGS) $(OS_FLAG)
 RM						:= rm -f
 
 LIB_DIRECTORY			:= ./libs/
@@ -62,7 +64,8 @@ SOURCES_LIST			:= main.c\
 							print_util.c\
 							pipe_handler.c\
 							heredoc_handler.c\
-							parse_command.c
+							parse_command.c\
+							del_node.c
 HEADER_LIST				:= pipex.h
 HEADER_FILES			:= $(addprefix $(INCLUDE_DIR), $(HEADER_LIST))
 
