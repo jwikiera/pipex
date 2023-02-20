@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include <errno.h>
 
 extern char	**environ;
 
@@ -47,11 +48,35 @@ int	main(int argc, char *argv[])
 
 	/// ---- TEST -------
 
+	/*
 	ft_printf("test\n");
 	char	**lol = ft_quote_split("awk 'BEGIN { for(i=1;i<=6;i++) print \"square of\", i, \"is\",i*i; }'", "'\"");
 	ft_print_strarr(lol, 0, 1);
 	ft_printf("\n");
 	ft_printf("len of lol: %d\n", ft_strarrlen(lol));
+	 */
+
+	//ft_printf("exec res: %d\n", execve("checker", ft_quote_split("lol", ""), environ));
+
+	int id;
+
+	id = fork();
+	if (id == 0)
+	{
+		ft_printf("hello from the fork\n");
+		ft_print_strarr(ft_quote_split("touch file3", ""), 0, 1);
+		//ft_print_strarr(environ, 0, 1);
+		ft_printf("\n");
+		execve("/bin/ls", ft_quote_split("/bin/ls", ""), environ);
+	}
+	else
+	{
+		int res;
+
+		wait(&res);
+		ft_printf("errno: %d\n", errno);
+		ft_printf("wait res: %d\n", res);
+	}
 
 	/// ---- END TEST ---
 

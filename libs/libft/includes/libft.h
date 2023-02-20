@@ -102,6 +102,7 @@ void		ft_delnode(void *content);
 int			ft_lstadd_chr(char c, t_list **lst);
 int			ft_lstadd_str(char *str, t_list **lst);
 char		**ft_quote_split(const char *str, const char *set);
+char		**ft_environ_to_path_strarr(const char *envp);
 
 /* math */
 int			ft_min_int(int a, int b);
