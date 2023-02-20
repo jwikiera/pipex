@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_splitset.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwikiera <jwikiera@student.42lausan>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -14,7 +14,7 @@
 
 #include "stdio.h"
 
-int	count_words(char const *str, char sep)
+static int	count_words_set(char const *str, const char *sep)
 {
 	int	i;
 	int	same_word;
@@ -23,7 +23,7 @@ int	count_words(char const *str, char sep)
 	same_word = 0;
 	while (*str)
 	{
-		if (*str == sep)
+		if (ft_chr_in_str(*str, sep))
 			same_word = 0;
 		else
 		{
@@ -38,20 +38,31 @@ int	count_words(char const *str, char sep)
 	return (i);
 }
 
-static size_t	next_wordlen(char const *str, char sep)
+static size_t	next_wordlen(char const *str, const char *sep)
 {
 	int	i;
 
 	i = 0;
 	while (*str)
 	{
-		if (*str == sep)
+		if (ft_chr_in_str(*str, sep))
 			return (i);
 		else
 			i ++;
 		str ++;
 	}
 	return (i);
+}
+
+static char	**handle_empty(void)
+{
+	char	**res;
+
+	res = malloc(sizeof(*res));
+	if (!res)
+		return (0);
+	res[0] = 0;
+	return (res);
 }
 
 static int	free_split(char ***res, int index)
@@ -70,31 +81,20 @@ static int	free_split(char ***res, int index)
 	return (1);
 }
 
-static char	**handle_empty(void)
-{
-	char	**res;
-
-	res = malloc(sizeof(*res));
-	if (!res)
-		return (0);
-	res[0] = 0;
-	return (res);
-}
-
-char	**ft_split(char const *str, char sep)
+char	**ft_splitset(char const *str, const char *sep)
 {
 	char	**res;
 	int		i;
 
-	if (!count_words(str, sep))
+	if (!count_words_set(str, sep))
 		return (handle_empty());
-	res = malloc(sizeof(*res) * (count_words(str, sep) + 1));
+	res = malloc(sizeof(*res) * (count_words_set(str, sep) + 1));
 	if (!res)
 		return (0);
 	i = 0;
 	while (*str)
 	{
-		if (*str != sep)
+		if (!ft_chr_in_str(*str, sep))
 		{
 			res[i] = malloc(next_wordlen(str, sep) + 1);
 			if (free_split(&res, i))

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                            :+:      :+:    :+:   */
+/*   ft_tlst_to_str.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwikiera <jwikiera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,45 +10,34 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-t_pipex	*init_pipex(void)
+static char	*create_arr(t_list *lst)
 {
-	t_pipex	*res;
+	t_list	*iter;
+	size_t	i;
+	char	*res;
 
-	res = malloc(sizeof(*res));
+	res = malloc(sizeof(*res) * (ft_lstsize(lst) + 1));
 	if (!res)
 		return (NULL);
-	res->is_heredoc = 0;
-	res->heredoc_args = NULL;
-	res->heredoc_argc = 0;
-	res->file1_fd = -1;
-	res->file2_fd = -1;
-	res->commands = NULL;
-	res->commandc = 0;
+	iter = lst;
+	i = 0;
+	while (iter)
+	{
+		res[i] = (char) iter->content;
+		iter = iter->next;
+		i ++;
+	}
+	res[i] = '\0';
 	return (res);
 }
 
-/* pipex->commands is a 2d char array but individual strings are also in argv
- * and should be freed by the OS */
-void	free_pipex(t_pipex *pipex)
+char	*ft_tlst_to_str(t_list *lst)
 {
-	size_t	i;
-
-	if (pipex && pipex->heredoc_args)
-		free(pipex->heredoc_args);
-	if (pipex && pipex->commands)
-	{
-		i = 0;
-		while (i < pipex->commandc)
-		{
-			if (pipex->commands[i])
-				ft_free_split(pipex->commands[i],
-					ft_strarrlen(pipex->commands[i]));
-			i ++;
-		}
-		free(pipex->commands);
-	}
-	if (pipex)
-		free(pipex);
+	if (!lst)
+		return (NULL);
+	if (ft_lstsize(lst) == 0)
+		return (NULL);
+	return (create_arr(lst));
 }

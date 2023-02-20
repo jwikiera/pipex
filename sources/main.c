@@ -12,7 +12,7 @@
 
 #include "pipex.h"
 
-extern char **environ;
+extern char	**environ;
 
 void	handle_exit(char *msg, int code, t_pipex *pipex)
 {
@@ -43,13 +43,6 @@ int	main(int argc, char *argv[])
 		handle_heredoc(pipex);
 	else
 		handle_pipes(pipex);
-
-	/*char **test = parse_command(pipex->commands[0]);
-	ft_printf("test: ");
-	ft_print_strarr(test, 0, 1);
-	ft_printf("\n");*/
-
 	handle_exit(NULL, 0, pipex);
-
 	return (0);
 }

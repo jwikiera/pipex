@@ -95,6 +95,9 @@ int			ft_print_strarr(char **arr, size_t len, int null_terminated);
 char		**ft_tlst_to_strarr(t_list *lst);
 size_t		ft_strarrlen(char **strarr);
 int			ft_isblankstr(const char *str);
+char		**ft_splitset(char const *str, const char *sep);
+int			ft_chr_in_str(char c, const char *str);
+char		*ft_tlst_to_str(t_list *lst);
 
 /* math */
 int			ft_min_int(int a, int b);

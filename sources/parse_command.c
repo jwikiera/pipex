@@ -74,9 +74,9 @@ static	int	handle_split(char *command, char **ap_split,
 	while (ft_strlen(command) > 0 && j < ft_strlen(command) - 1
 		&& ft_strlen(command + j) > ft_strlen(ap_split[i]))
 	{
-		if (command[j] == '"' && !ft_strncmp(command + j + 1, ap_split[i],
-				ft_strlen(ap_split[i])) && command[j + 1
-				+ ft_strlen(ap_split[i])] == '"')
+		if (ft_chr_in_str(command[j], "\"'") && !ft_strncmp(command + j + 1,
+				ap_split[i], ft_strlen(ap_split[i])) && ft_chr_in_str(command[j
+					+ 1 + ft_strlen(ap_split[i])], "\"'"))
 		{
 			if (!add_to_com_lst(ap_split[i], com_lst))
 				return (0);
@@ -97,7 +97,7 @@ char	**parse_command(char *command)
 	char	**res;
 
 	com_lst = NULL;
-	ap_split = ft_split(command, '"');
+	ap_split = ft_splitset(command, "\"'");
 	if (!ap_split)
 		return (NULL);
 	i = 0;
