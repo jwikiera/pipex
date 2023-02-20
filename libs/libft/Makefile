@@ -105,7 +105,10 @@ SRCS_OWN_LIST		:= ft_str_starts_ends_with.c\
 						ft_splitset.c\
 						ft_chr_in_str.c\
 						ft_quote_split.c\
-						ft_tlst_to_str.c
+						ft_tlst_to_str.c\
+						del_node.c\
+						ft_lstadd_chr.c\
+						ft_lstadd_str.c
 OBJS_OWN_LIST		:= $(patsubst %.c, %.o, $(SRCS_OWN_LIST))
 OBJS_OWN			:= $(addprefix $(OBJECTS_DIRECTORY), $(OBJS_OWN_LIST))
 

@@ -43,6 +43,19 @@ int	main(int argc, char *argv[])
 		handle_heredoc(pipex);
 	else
 		handle_pipes(pipex);
+
+
+	/// ---- TEST -------
+
+	ft_printf("test\n");
+	char	**lol = ft_quote_split("awk 'BEGIN { for(i=1;i<=6;i++) print \"square of\", i, \"is\",i*i; }'", "'\"");
+	ft_print_strarr(lol, 0, 1);
+	ft_printf("\n");
+	ft_printf("len of lol: %d\n", ft_strarrlen(lol));
+
+	/// ---- END TEST ---
+
+
 	handle_exit(NULL, 0, pipex);
 	return (0);
 }

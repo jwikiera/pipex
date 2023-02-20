@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tlst_to_str.c                                   :+:      :+:    :+:   */
+/*   ft_lstadd_chr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwikiera <jwikiera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,32 +12,22 @@
 
 #include "libft.h"
 
-static char	*create_arr(t_list *lst)
+/* *content is not a null terminated string, only a single char */
+int	ft_lstadd_chr(char c, t_list **lst)
 {
-	t_list	*iter;
-	size_t	i;
-	char	*res;
+	t_list	*child;
+	char	*content;
 
-	res = malloc(sizeof(*res) * (ft_lstsize(lst) + 1));
-	if (!res)
-		return (NULL);
-	iter = lst;
-	i = 0;
-	while (iter)
+	content = malloc(sizeof(*content));
+	if (!content)
+		return (0);
+	content[0] = c;
+	child = ft_lstnew(content);
+	if (!child)
 	{
-		res[i] = ((char *)(iter->content))[0];
-		iter = iter->next;
-		i ++;
+		free(content);
+		return (0);
 	}
-	res[i] = '\0';
-	return (res);
-}
-
-char	*ft_tlst_to_str(t_list *lst)
-{
-	if (!lst)
-		return (NULL);
-	if (ft_lstsize(lst) == 0)
-		return (NULL);
-	return (create_arr(lst));
+	ft_lstadd_back(lst, child);
+	return (1);
 }
