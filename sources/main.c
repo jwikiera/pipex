@@ -48,6 +48,11 @@ int	main(int argc, char *argv[])
 
 	/// ---- TEST -------
 
+	char **pth = ft_environ_to_path_strarr(environ);
+	ft_println_strarr(pth, 0, 1);
+
+	ft_joinpaths("lol", "lel", NULL);
+
 	/*
 	ft_printf("test\n");
 	char	**lol = ft_quote_split("awk 'BEGIN { for(i=1;i<=6;i++) print \"square of\", i, \"is\",i*i; }'", "'\"");
@@ -58,7 +63,7 @@ int	main(int argc, char *argv[])
 
 	//ft_printf("exec res: %d\n", execve("checker", ft_quote_split("lol", ""), environ));
 
-	int id;
+	/*int id;
 
 	id = fork();
 	if (id == 0)
@@ -76,7 +81,11 @@ int	main(int argc, char *argv[])
 		wait(&res);
 		ft_printf("errno: %d\n", errno);
 		ft_printf("wait res: %d\n", res);
-	}
+
+		ft_println_strarr(environ, 0, 1);
+		char **pth = ft_environ_to_path_strarr((const char *) environ);
+		ft_println_strarr(pth, 0, 1);
+	}*/
 
 	/// ---- END TEST ---
 

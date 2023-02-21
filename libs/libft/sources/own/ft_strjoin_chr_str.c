@@ -1,18 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ptstrfd_s.c                                     :+:      :+:    :+:   */
+/*   ft_strjoin_chr_str.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwikiera <jwikiera@student.42lausan>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 16:01:56 by jwikiera          #+#    #+#             */
-/*   Updated: 2022/10/27 16:01:57 by jwikiera         ###   ########.fr       */
+/*   Created: 2022/10/21 11:44:57 by jwikiera          #+#    #+#             */
+/*   Updated: 2022/10/21 11:45:03 by jwikiera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-ssize_t	ft_ptstrfd_s(const char *s, int fd)
+char	*ft_strjoin_chr_str(char c, const char *str)
 {
-	return (write(fd, s, ft_strlen(s)));
+	
 }

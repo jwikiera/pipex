@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ptstrfd_s.c                                     :+:      :+:    :+:   */
+/*   ft_println_strarr.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwikiera <jwikiera@student.42lausan>       +#+  +:+       +#+        */
+/*   By: jwikiera <jwikiera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 16:01:56 by jwikiera          #+#    #+#             */
-/*   Updated: 2022/10/27 16:01:57 by jwikiera         ###   ########.fr       */
+/*   Created: 2022/10/11 11:46:56 by jwikiera          #+#    #+#             */
+/*   Updated: 2022/10/11 13:36:27 by jwikiera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-ssize_t	ft_ptstrfd_s(const char *s, int fd)
+int	ft_println_strarr(char **arr, size_t len, int null_terminated)
 {
-	return (write(fd, s, ft_strlen(s)));
+	if (!ft_print_strarr(arr, len, null_terminated))
+		return (0);
+	if (!ft_ptstrfd_s("\n", 1))
+		return (0);
+	return (1);
 }

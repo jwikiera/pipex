@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ptstrfd_s.c                                     :+:      :+:    :+:   */
+/*   ft_getsep.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwikiera <jwikiera@student.42lausan>       +#+  +:+       +#+        */
+/*   By: jwikiera <jwikiera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 16:01:56 by jwikiera          #+#    #+#             */
-/*   Updated: 2022/10/27 16:01:57 by jwikiera         ###   ########.fr       */
+/*   Created: 2022/10/11 11:46:56 by jwikiera          #+#    #+#             */
+/*   Updated: 2022/10/11 13:36:27 by jwikiera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-ssize_t	ft_ptstrfd_s(const char *s, int fd)
+char	ft_getsep()
 {
-	return (write(fd, s, ft_strlen(s)));
+	return (SEP);
 }

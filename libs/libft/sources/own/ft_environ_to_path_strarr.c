@@ -12,35 +12,31 @@
 
 #include "libft.h"
 
-static char	**final_ret(char *pth)
+static char	**final_ret(const char *pth)
 {
-	char	**scnd_split_res;
-
 	if (ft_strlen(pth) < ft_strlen("PATH="))
 		return (NULL);
-	return(ft_split(pth + ft_strlen("PATH="), ':'));
+	return (ft_split(pth + ft_strlen("PATH="), ':'));
 }
 
-char	**ft_environ_to_path_strarr(const char *envp)
+/*
+ * Extracts paths from PATH in the environ variable.
+ * Returns result in a NULL terminated string array.
+ * */
+char	**ft_environ_to_path_strarr(char **envp)
 {
-	t_list	*lst;
 	char	**res;
-	char	**split_res;
 	size_t	i;
 
 	res = NULL;
 	if (!envp)
 		return (NULL);
-	split_res = ft_split(envp, '\n');
-	if (!split_res)
-		return (NULL);
 	i = 0;
-	while (i < ft_strarrlen(split_res)
-			&& ft_strncmp(split_res[i], "PATH", ft_strlen("PATH")))
+	while (i < ft_strarrlen(envp)
+		&& ft_strncmp(envp[i], "PATH", ft_strlen("PATH")))
 		i ++;
-	if (i == ft_strarrlen(split_res))
+	if (i == ft_strarrlen(envp))
 		return (NULL);
-	res = final_ret(split_res[i]);
-	ft_free_split(split_res, ft_strarrlen(split_res));
+	res = final_ret(envp[i]);
 	return (res);
 }

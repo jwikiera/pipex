@@ -16,9 +16,15 @@
 # include <stdlib.h>
 # include <limits.h>
 # include <unistd.h>
+# include <stdarg.h>
+# include <fcntl.h>
 
 # define PI	3.14159265358979323846264338327950288
 # define HALFPI 1.57079632679489661923132169163975144
+
+# ifndef SEP
+#  define SEP '/'
+# endif
 
 int			ft_isalpha(int c);
 int			ft_isdigit(int c);
@@ -83,6 +89,7 @@ int			**ft_realloc_int2darr(int **src, size_t elem_size,
 char		*ft_realloc_chararr(char *src, size_t arr_size, size_t new_size);
 int			ft_str_is_int(const char *str);
 char		*ft_powertrim(const char *str, const char *set);
+char		*ft_powertrim_chr(const char *str, char c);
 int			ft_isspace(char c);
 long		ft_atoi_l(const char *nptr);
 int			ft_get_str_sign(const char *str);
@@ -90,8 +97,9 @@ void		ft_free_split(char **split_res, size_t size);
 int			ft_index_of_int(const int *arr, int size, int target);
 int			ft_array_is_sorted(const int *arr, size_t len);
 int			*ft_intarr_bubblesort(const int *arr, size_t len);
-ssize_t		ft_ptstrfd_s(char *s, int fd);
+ssize_t		ft_ptstrfd_s(const char *s, int fd);
 int			ft_print_strarr(char **arr, size_t len, int null_terminated);
+int			ft_println_strarr(char **arr, size_t len, int null_terminated);
 char		**ft_tlst_to_strarr(t_list *lst);
 size_t		ft_strarrlen(char **strarr);
 int			ft_isblankstr(const char *str);
@@ -102,7 +110,14 @@ void		ft_delnode(void *content);
 int			ft_lstadd_chr(char c, t_list **lst);
 int			ft_lstadd_str(char *str, t_list **lst);
 char		**ft_quote_split(const char *str, const char *set);
-char		**ft_environ_to_path_strarr(const char *envp);
+char		**ft_environ_to_path_strarr(char **envp);
+char		*ft_getpath(const char *binname, char **envp);
+int			ft_bin_in_path(const char *binname, const char *path);
+int			ft_file_exists(const char *fname);
+int			ft_file_isex(const char *fname);
+char		*ft_joinpaths(const char *path, ...);
+char		ft_getsep();
+char		*ft_strjoin_chr_str(char c, const char *str);
 
 /* math */
 int			ft_min_int(int a, int b);

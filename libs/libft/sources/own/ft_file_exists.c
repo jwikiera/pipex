@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ptstrfd_s.c                                     :+:      :+:    :+:   */
+/*   ft_file_exists.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwikiera <jwikiera@student.42lausan>       +#+  +:+       +#+        */
+/*   By: jwikiera <jwikiera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 16:01:56 by jwikiera          #+#    #+#             */
-/*   Updated: 2022/10/27 16:01:57 by jwikiera         ###   ########.fr       */
+/*   Created: 2022/10/11 11:46:56 by jwikiera          #+#    #+#             */
+/*   Updated: 2022/10/11 13:36:27 by jwikiera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-ssize_t	ft_ptstrfd_s(const char *s, int fd)
+int	ft_file_exists(const char *fname)
 {
-	return (write(fd, s, ft_strlen(s)));
+	int	fd;
+
+	fd = open(fname, O_RDONLY);
+	close(fd);
+	if (fd == -1)
+		return (0);
+	return (1);
 }
