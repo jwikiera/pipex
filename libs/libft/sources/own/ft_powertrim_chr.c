@@ -23,7 +23,7 @@ char	*ft_powertrim_chr(const char *str, char c)
 		return (NULL);
 	joined_set[0] = c;
 	if (!ft_strlcpy(joined_set + 1, " \f\n\r\t\v",
-	ft_strlen(" \f\n\r\t\v") + 1))
+			ft_strlen(" \f\n\r\t\v") + 1))
 		return (0);
 	res = ft_strtrim(str, joined_set);
 	free(joined_set);

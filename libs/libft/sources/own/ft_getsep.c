@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-char	ft_getsep()
+char	ft_getsep(void)
 {
 	return (SEP);
 }

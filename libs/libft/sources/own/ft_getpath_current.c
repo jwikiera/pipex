@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getpath.c                                       :+:      :+:    :+:   */
+/*   ft_getpath_current.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwikiera <jwikiera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,37 +12,42 @@
 
 #include "libft.h"
 
-static char	*free_path_strarr(char **path_strarr)
+static char	*fr(char *trimmed, char *sep_prefix)
 {
-	ft_free_split(path_strarr,
-		ft_strarrlen(path_strarr));
+	if (trimmed)
+		free(trimmed);
+	if (sep_prefix)
+		free(sep_prefix);
 	return (NULL);
 }
 
 /*
- * If available, returns the path of a given binary.
+ * If available, returns the path of a given binary, including current dir.
  * */
-char	*ft_getpath(const char *binname, char **envp)
+char	*ft_getpath_current(const char *binname, char **envp)
 {
-	char	**path_strarr;
-	char	*full_path;
-	size_t	i;
+	char	*trimmed;
+	char	*sep_prefix;
 
-	if (!binname || !envp)
+	trimmed = ft_powertrim(binname, "");
+	if (!trimmed)
 		return (NULL);
-	path_strarr = ft_environ_to_path_strarr(envp);
-	if (!path_strarr)
-		return (NULL);
-	i = 0;
-	while (path_strarr[i])
+	sep_prefix = malloc(sizeof(*sep_prefix) * 3);
+	if (!sep_prefix)
+		return (fr(trimmed, 0));
+	sep_prefix[0] = '.';
+	sep_prefix[1] = ft_getsep();
+	sep_prefix[2] = '\0';
+	if (!ft_strncmp(trimmed, sep_prefix, 2)
+		&& ft_bin_in_path(trimmed, "."))
 	{
-		if (ft_bin_in_path(binname, path_strarr[i]))
-		{
-			full_path = ft_joinpaths(path_strarr[i], binname, NULL);
-			free_path_strarr(path_strarr);
-			return (full_path);
-		}
-		i ++;
+		fr(0, sep_prefix);
+		return (trimmed);
 	}
-	return (free_path_strarr(path_strarr));
+	else if (ft_strncmp(trimmed, sep_prefix, 2))
+	{
+		fr(trimmed, sep_prefix);
+		return (ft_getpath(binname, envp));
+	}
+	return (fr(trimmed, sep_prefix));
 }

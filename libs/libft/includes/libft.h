@@ -18,6 +18,8 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <fcntl.h>
+# include <errno.h>
+# include <stdio.h>
 
 # define PI	3.14159265358979323846264338327950288
 # define HALFPI 1.57079632679489661923132169163975144
@@ -113,14 +115,17 @@ int			ft_lstadd_str(char *str, t_list **lst);
 char		**ft_quote_split(const char *str, const char *set);
 char		**ft_environ_to_path_strarr(char **envp);
 char		*ft_getpath(const char *binname, char **envp);
+char		*ft_getpath_current(const char *binname, char **envp);
 int			ft_bin_in_path(const char *binname, const char *path);
 int			ft_file_exists(const char *fname);
 int			ft_file_isex(const char *fname);
 char		*ft_joinpaths(const char *path, ...);
-char		ft_getsep();
+char		ft_getsep(void);
 char		*ft_strjoin_chr_str(char c, const char *str);
 char		*ft_str_tlst_to_str(t_list *lst);
 char		*ft_str_tlst_to_str_join(t_list *lst, char sep);
+int			ft_command_ex(char *command, char **envp);
+int			ft_command_ex_current(char *command, char **envp);
 
 /* math */
 int			ft_min_int(int a, int b);

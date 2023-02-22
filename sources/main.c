@@ -58,6 +58,7 @@ int	main(int argc, char *argv[])
 	ft_lstadd_str("/hello", &mystrs);
 	ft_lstadd_str("world", &mystrs);
 	char *bruhh = ft_str_tlst_to_str_join(mystrs, ':');
+
 	ft_printf("mystrs: %s\n", bruhh);
 	free (bruhh);
 
@@ -95,8 +96,13 @@ int	main(int argc, char *argv[])
 		ft_println_strarr(pth, 0, 1);
 	}*/
 
-	/// ---- END TEST ---
+	char *lspath = ft_getpath_current("./checker", environ);
+	ft_printf("bin ls: %s\n", lspath);
+	free(lspath);
+	ft_printf("test %d\n", open("", O_RDONLY));
 
+
+	/// ---- END TEST ---
 
 	handle_exit(NULL, 0, pipex);
 	return (0);

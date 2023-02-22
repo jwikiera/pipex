@@ -27,6 +27,12 @@ static size_t	combined_len(t_list *lst)
 	return (res);
 }
 
+static void	inc_cntrs(size_t *i, int *wc)
+{
+	(*i)++;
+	(*wc)++;
+}
+
 static char	*create_arr(t_list *lst, char sep)
 {
 	t_list	*iter;
@@ -34,7 +40,8 @@ static char	*create_arr(t_list *lst, char sep)
 	int		wc;
 	char	*res;
 
-	res = malloc(sizeof(*res) * (combined_len(lst) + 1) + ft_max_int(0, ft_lstsize(lst) - 1));
+	res = malloc(sizeof(*res) * (combined_len(lst) + 1)
+			+ ft_max_int(0, ft_lstsize(lst) - 1));
 	if (!res)
 		return (NULL);
 	iter = lst;
@@ -47,8 +54,7 @@ static char	*create_arr(t_list *lst, char sep)
 		if (wc < ft_lstsize(lst) - 1)
 		{
 			res[i] = sep;
-			i ++;
-			wc ++;
+			inc_cntrs(&i, &wc);
 		}
 		iter = iter->next;
 	}

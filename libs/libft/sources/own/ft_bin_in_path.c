@@ -19,12 +19,19 @@ int	ft_bin_in_path(const char *binname, const char *path)
 {
 	char	*full_path;
 
-	full_path = ft_joinpaths(binname, path, NULL);
+	full_path = ft_joinpaths(path, binname, NULL);
 	if (!full_path)
 		return (0);
 	if (!ft_file_exists(full_path))
+	{
+		free(full_path);
 		return (0);
+	}
 	if (!ft_file_isex(full_path))
+	{
+		free(full_path);
 		return (0);
+	}
+	free(full_path);
 	return (1);
 }

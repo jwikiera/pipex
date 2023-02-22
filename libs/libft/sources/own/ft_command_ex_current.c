@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tlst_to_str_join.c                           :+:      :+:    :+:   */
+/*   ft_command_ex_current.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwikiera <jwikiera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,39 +12,13 @@
 
 #include "libft.h"
 
-static char	*create_arr(t_list *lst, char sep)
+int	ft_command_ex_current(char *command, char **envp)
 {
-	t_list	*iter;
-	int		i;
 	char	*res;
 
-	res = malloc(sizeof(*res) * (ft_lstsize(lst) + 1
-				+ ft_max_int(ft_lstsize(lst) - 1, 0)));
-	if (!res)
-		return (NULL);
-	iter = lst;
-	i = 0;
-	while (iter)
-	{
-		res[i] = ((char *)(iter->content))[0];
-		if (i < ft_lstsize(lst) - 1)
-		{
-			res[i + 1] = sep;
-			i += 2;
-		}
-		else
-			i ++;
-		iter = iter->next;
-	}
-	res[i] = '\0';
-	return (res);
-}
-
-char	*ft_tlst_to_str_join(t_list *lst, char sep)
-{
-	if (!lst)
-		return (NULL);
-	if (ft_lstsize(lst) == 0)
-		return (NULL);
-	return (create_arr(lst, sep));
+	res = ft_getpath_current(command, envp);
+	if (res == NULL)
+		return (0);
+	free(res);
+	return (1);
 }

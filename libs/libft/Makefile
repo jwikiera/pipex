@@ -114,6 +114,7 @@ SRCS_OWN_LIST		:= ft_str_starts_ends_with.c\
 						ft_lstadd_str.c\
 						ft_environ_to_path_strarr.c\
 						ft_getpath.c\
+						ft_getpath_current.c\
 						ft_bin_in_path.c\
 						ft_file_exists.c\
 						ft_file_isex.c\
@@ -121,7 +122,9 @@ SRCS_OWN_LIST		:= ft_str_starts_ends_with.c\
 						ft_getsep.c\
 						ft_strjoin_chr_str.c\
 						ft_str_tlst_to_str.c\
-						ft_str_tlst_to_str_join.c
+						ft_str_tlst_to_str_join.c\
+						ft_command_ex.c\
+						ft_command_ex_current.c
 OBJS_OWN_LIST		:= $(patsubst %.c, %.o, $(SRCS_OWN_LIST))
 OBJS_OWN			:= $(addprefix $(OBJECTS_DIRECTORY), $(OBJS_OWN_LIST))
 
