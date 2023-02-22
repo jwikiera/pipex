@@ -39,28 +39,49 @@ static int	lst_add_first(const char *frst, t_list **lst)
 		return (ft_lstadd_str(all_trimmed, lst));
 }
 
+static int	lst_add(const char *path, t_list **lst)
+{
+	char	*trimmed;
+
+	trimmed = ft_powertrim_chr(path, ft_getsep());
+	if (!trimmed)
+		return (0);
+	return (ft_lstadd_str(trimmed, lst));
+}
+
+char	*proxy_ret(t_list **lst)
+{
+	char	*res;
+
+	res = ft_str_tlst_to_str_join(*lst, ft_getsep());
+	ft_lstclear(lst, ft_delnode);
+	return (res);
+}
+
 /* Accepts NULL terminated list of paths */
 char	*ft_joinpaths(const char *path, ...)
 {
 	va_list		ptr;
-	size_t		pthcnt;
 	t_list		*pth_lst;
 
-	pthcnt = 0;
 	pth_lst = NULL;
 	va_start(ptr, path);
-	ft_putstr_fd("received paths:\n", 1);
-	if (!lst_add_first(path, &pth_lst))
-		return (0);
+	if (!path || !lst_add_first(path, &pth_lst))
+	{
+		ft_lstclear(&pth_lst, ft_delnode);
+		return (NULL);
+	}
+	path = va_arg(ptr, const char *);
 	while (path)
 	{
-		pthcnt ++;
-		ft_ptstrfd_s(path, 1);
-		ft_ptstrfd_s("\n", 1);
+		if (!ft_isblankstr(path) && !lst_add(path, &pth_lst))
+		{
+			ft_lstclear(&pth_lst, ft_delnode);
+			va_end(ptr);
+			return (NULL);
+		}
 		path = va_arg(ptr, const char *);
 	}
 	va_end(ptr);
-	if (pthcnt == 0)
-		return (NULL);
-	return (NULL);
+	return (proxy_ret(&pth_lst));
 }

@@ -106,6 +106,7 @@ int			ft_isblankstr(const char *str);
 char		**ft_splitset(char const *str, const char *sep);
 int			ft_chr_in_str(char c, const char *str);
 char		*ft_tlst_to_str(t_list *lst);
+char		*ft_tlst_to_str_join(t_list *lst, char sep);
 void		ft_delnode(void *content);
 int			ft_lstadd_chr(char c, t_list **lst);
 int			ft_lstadd_str(char *str, t_list **lst);
@@ -118,6 +119,8 @@ int			ft_file_isex(const char *fname);
 char		*ft_joinpaths(const char *path, ...);
 char		ft_getsep();
 char		*ft_strjoin_chr_str(char c, const char *str);
+char		*ft_str_tlst_to_str(t_list *lst);
+char		*ft_str_tlst_to_str_join(t_list *lst, char sep);
 
 /* math */
 int			ft_min_int(int a, int b);

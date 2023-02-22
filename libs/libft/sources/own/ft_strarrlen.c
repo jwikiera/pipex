@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-size_t	ft_strarrlen(const char **strarr)
+size_t	ft_strarrlen(char **strarr)
 {
 	size_t	cnt;
 

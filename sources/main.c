@@ -51,7 +51,15 @@ int	main(int argc, char *argv[])
 	char **pth = ft_environ_to_path_strarr(environ);
 	ft_println_strarr(pth, 0, 1);
 
-	ft_joinpaths("lol", "lel", NULL);
+	char * paths = ft_joinpaths("/home/jack/", "/lol", "  /test", NULL);
+	ft_printf("paths: %s\n", paths);
+
+	t_list	*mystrs = NULL;
+	ft_lstadd_str("/hello", &mystrs);
+	ft_lstadd_str("world", &mystrs);
+	char *bruhh = ft_str_tlst_to_str_join(mystrs, ':');
+	ft_printf("mystrs: %s\n", bruhh);
+	free (bruhh);
 
 	/*
 	ft_printf("test\n");

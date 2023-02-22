@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tlst_to_str.c                                   :+:      :+:    :+:   */
+/*   ft_str_tlst_to_str.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwikiera <jwikiera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,29 +12,44 @@
 
 #include "libft.h"
 
+static size_t	combined_len(t_list *lst)
+{
+	t_list	*iter;
+	size_t	res;
+
+	iter = lst;
+	res = 0;
+	while (iter)
+	{
+		res += ft_strlen(iter->content);
+		iter = iter->next;
+	}
+	return (res);
+}
+
 static char	*create_arr(t_list *lst)
 {
 	t_list	*iter;
 	size_t	i;
 	char	*res;
 
-	res = malloc(sizeof(*res) * (ft_lstsize(lst) + 1));
+	res = malloc(sizeof(*res) * (combined_len(lst) + 1));
 	if (!res)
 		return (NULL);
 	iter = lst;
 	i = 0;
 	while (iter)
 	{
-		res[i] = ((char *)(iter->content))[0];
+		ft_strlcpy(res + i, iter->content, ft_strlen(iter->content) + 1);
+		i += ft_strlen(iter->content);
 		iter = iter->next;
-		i ++;
 	}
 	res[i] = '\0';
 	return (res);
 }
 
-/* Combines lst of null terminated SINGLE CHARS into a string */
-char	*ft_tlst_to_str(t_list *lst)
+/* Combines lst of null terminated strings into a string */
+char	*ft_str_tlst_to_str(t_list *lst)
 {
 	if (!lst)
 		return (NULL);
