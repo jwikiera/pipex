@@ -94,10 +94,10 @@ int	main(int argc, char *argv[])
 		ft_println_strarr(pth, 0, 1);
 	}*/
 
-	char *lspath = ft_getpath_current("./checker", environ);
+	/*char *lspath = ft_getpath_current("./checker", environ);
 	ft_printf("bin ls: %s\n", lspath);
 	free(lspath);
-	ft_printf("test %d\n", open("", O_RDONLY));
+	ft_printf("test %d\n", open("", O_RDONLY)); */
 
 
 	//execve("/usr/../usr/bin/ls", ft_quote_split("/usr/../usr/bin/ls", ""), environ);
