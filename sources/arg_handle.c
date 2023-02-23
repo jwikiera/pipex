@@ -21,40 +21,61 @@ int	heredoc_arg_handle(int argc, char *argv[], t_pipex *pipex)
 	return (1);
 }
 
-int	pipe_arg_handle(int argc, char *argv[], t_pipex *pipex)
+static int	check_bins(t_pipex *pipex)
+{
+	size_t	i;
+	int		errored;
+
+	i = 0;
+	errored = 0;
+	while (i < pipex->commandc)
+	{
+		if (ft_strarrlen(pipex->commands[i]) < 1)
+		{
+			errored = 1;
+			pi_error("command is empty", 0);
+		}
+		else if (!ft_command_ex_current(pipex->commands[i][0], environ))
+		{
+			if (!ft_ptstrfd_s("pipex: ", 2))
+				return (0);
+			if (!ft_ptstrfd_s(pipex->commands[i][0], 2))
+				return (0);
+			if (!ft_ptstrfd_s(": command not found\n", 2))
+				return (0);
+			errored = 1;
+		}
+		i ++;
+	}
+	return (!errored);
+}
+
+static int	pipe_arg_handle(int argc, char *argv[], t_pipex *pipex)
 {
 	int	i;
 
 	if (!handle_files(argv[1], argv[argc - 1], pipex))
-	{
-		ft_putstr_fd("Failed to open files.\n", 2);
-		return (0);
-	}
+		return (pi_error("failed to open files.\n", 0));
 	pipex->commands = malloc(sizeof(*pipex->commands) * argc - 3);
 	if (!pipex->commands)
-	{
-		ft_putstr_fd("Failed to malloc pipex->commands.\n", 2);
-		return (0);
-	}
+		return (pi_error("failed to malloc pipex->commands.\n", 1));
 	i = 2;
+	pipex->commandc = 0;
 	while (i < argc - 1)
 	{
 		pipex->commands[i - 2] = parse_command(argv[i]);
 		if (!pipex->commands[i - 2])
 			return (0);
 		i ++;
+		pipex->commandc ++;
 	}
-	pipex->commandc = argc - 3;
-	return (1);
+	return (check_bins(pipex));
 }
 
 int	arg_handle(int argc, char *argv[], t_pipex *pipex)
 {
 	if (argc < 5)
-	{
-		ft_putstr_fd("At least four arguments expected.\n", 2);
-		return (0);
-	}
+		return (pi_error("At least four arguments expected.\n", 0));
 	if (!ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])))
 		return (heredoc_arg_handle(argc, argv, pipex));
 	return (pipe_arg_handle(argc, argv, pipex));

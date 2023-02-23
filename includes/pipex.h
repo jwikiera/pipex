@@ -26,6 +26,8 @@
 # include <libft.h>
 # include <ft_printf.h>
 
+extern char	**environ;
+
 typedef struct s_pipex
 {
 	int		is_heredoc;
@@ -48,5 +50,6 @@ void	handle_pipes(t_pipex *pipex);
 void	handle_heredoc(t_pipex *pipex);
 char	**parse_command(char *command);
 void	pipex_del_node(void *content);
+int		pi_error(char *msg, int ret);
 
 #endif

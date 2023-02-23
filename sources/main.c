@@ -13,8 +13,6 @@
 #include "pipex.h"
 #include <errno.h>
 
-extern char	**environ;
-
 void	handle_exit(char *msg, int code, t_pipex *pipex)
 {
 	if (pipex)
@@ -24,7 +22,7 @@ void	handle_exit(char *msg, int code, t_pipex *pipex)
 		if (code == 0)
 			ft_putstr_fd(msg, 1);
 		else
-			ft_putstr_fd(msg, 2);
+			pi_error(msg, 0);
 	}
 	exit(code);
 }
@@ -36,9 +34,9 @@ int	main(int argc, char *argv[])
 	pipex = init_pipex();
 	print_pipex(pipex);
 	if (!pipex)
-		handle_exit("Failed to initialize pipex struct\n", 1, NULL);
+		handle_exit("failed to initialize pipex struct\n", 1, NULL);
 	if (!arg_handle(argc, argv, pipex))
-		handle_exit("Invalid arguments\n", 2, pipex);
+		handle_exit("invalid arguments\n", 2, pipex);
 	print_pipex(pipex);
 	if (pipex->is_heredoc)
 		handle_heredoc(pipex);
@@ -48,19 +46,19 @@ int	main(int argc, char *argv[])
 
 	/// ---- TEST -------
 
-	char **pth = ft_environ_to_path_strarr(environ);
-	ft_println_strarr(pth, 0, 1);
+	//char **pth = ft_environ_to_path_strarr(environ);
+	//ft_println_strarr(pth, 0, 1);
 
-	char * paths = ft_joinpaths("/home/jack/", "/lol", "  /test", NULL);
-	ft_printf("paths: %s\n", paths);
+	//char * paths = ft_joinpaths("/home/jack/", "/lol", "  /test", NULL);
+	//ft_printf("paths: %s\n", paths);
 
-	t_list	*mystrs = NULL;
+	/*t_list	*mystrs = NULL;
 	ft_lstadd_str("/hello", &mystrs);
 	ft_lstadd_str("world", &mystrs);
 	char *bruhh = ft_str_tlst_to_str_join(mystrs, ':');
 
 	ft_printf("mystrs: %s\n", bruhh);
-	free (bruhh);
+	free (bruhh);*/
 
 	/*
 	ft_printf("test\n");
