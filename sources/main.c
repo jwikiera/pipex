@@ -100,6 +100,8 @@ int	main(int argc, char *argv[])
 	ft_printf("test %d\n", open("", O_RDONLY));
 
 
+	//execve("/usr/../usr/bin/ls", ft_quote_split("/usr/../usr/bin/ls", ""), environ);
+
 	/// ---- END TEST ---
 
 	handle_exit(NULL, 0, pipex);

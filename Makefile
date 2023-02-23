@@ -66,7 +66,8 @@ SOURCES_LIST			:= main.c\
 							heredoc_handler.c\
 							parse_command.c\
 							del_node.c\
-							pi_error.c
+							pi_error.c\
+							heredoc_arg_handle.c
 HEADER_LIST				:= pipex.h
 HEADER_FILES			:= $(addprefix $(INCLUDE_DIR), $(HEADER_LIST))
 

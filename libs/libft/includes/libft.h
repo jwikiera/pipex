@@ -124,8 +124,9 @@ char		ft_getsep(void);
 char		*ft_strjoin_chr_str(char c, const char *str);
 char		*ft_str_tlst_to_str(t_list *lst);
 char		*ft_str_tlst_to_str_join(t_list *lst, char sep);
-int			ft_command_ex(char *command, char **envp);
-int			ft_command_ex_current(char *command, char **envp);
+int			ft_command_ex(const char *command, char **envp);
+int			ft_command_ex_current(const char *command, char **envp);
+char		*ft_basename(const char *path);
 
 /* math */
 int			ft_min_int(int a, int b);

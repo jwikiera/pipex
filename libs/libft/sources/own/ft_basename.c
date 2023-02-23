@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_command_ex.c                                    :+:      :+:    :+:   */
+/*   ft_basename.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwikiera <jwikiera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,13 +12,18 @@
 
 #include "libft.h"
 
-int	ft_command_ex(const char *command, char **envp)
+/* Gets base name from a path. Ex: /home/user/test -> test */
+char	*ft_basename(const char *path)
 {
+	char	**split_res;
 	char	*res;
 
-	res = ft_getpath(command, envp);
-	if (res == NULL)
-		return (0);
-	free(res);
-	return (1);
+	split_res = ft_split(path, ft_getsep());
+	if (!split_res)
+		return (NULL);
+	if (ft_strarrlen(split_res) < 1)
+		return (NULL);
+	res = ft_strdup(split_res[ft_strarrlen(split_res) - 1]);
+	ft_free_split(split_res, ft_strarrlen(split_res));
+	return (res);
 }

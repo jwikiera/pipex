@@ -33,7 +33,7 @@ static int	print_commands(t_pipex *pipex)
 
 int	print_pipex(t_pipex *pipex)
 {
-	if (!ft_printf("pipex struct @%x\n", pipex))
+	if (!ft_printf("pipex struct @%x\n", &pipex))
 		return (0);
 	if (!ft_printf("file1_fd: %d\n", pipex->file1_fd))
 		return (0);

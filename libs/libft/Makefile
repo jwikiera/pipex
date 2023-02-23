@@ -124,7 +124,8 @@ SRCS_OWN_LIST		:= ft_str_starts_ends_with.c\
 						ft_str_tlst_to_str.c\
 						ft_str_tlst_to_str_join.c\
 						ft_command_ex.c\
-						ft_command_ex_current.c
+						ft_command_ex_current.c\
+						ft_basename.c
 OBJS_OWN_LIST		:= $(patsubst %.c, %.o, $(SRCS_OWN_LIST))
 OBJS_OWN			:= $(addprefix $(OBJECTS_DIRECTORY), $(OBJS_OWN_LIST))
 

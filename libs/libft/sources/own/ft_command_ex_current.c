@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int	ft_command_ex_current(char *command, char **envp)
+int	ft_command_ex_current(const char *command, char **envp)
 {
 	char	*res;
 

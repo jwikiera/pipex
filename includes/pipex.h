@@ -22,6 +22,7 @@
 # include "unistd.h"
 # include "string.h"
 # include "fcntl.h"
+# include <sys/wait.h>
 
 # include <libft.h>
 # include <ft_printf.h>
@@ -51,5 +52,6 @@ void	handle_heredoc(t_pipex *pipex);
 char	**parse_command(char *command);
 void	pipex_del_node(void *content);
 int		pi_error(char *msg, int ret);
+int		heredoc_arg_handle(int argc, char *argv[], t_pipex *pipex);
 
 #endif

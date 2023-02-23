@@ -19,8 +19,30 @@ static char	*free_path_strarr(char **path_strarr)
 	return (NULL);
 }
 
+/* checks if a string starts with ./ */
+static int	starts_with_cr(const char *str)
+{
+	if (ft_strlen(str) < 2)
+		return (0);
+	return (str[0] == '.' && str[1] == ft_getsep());
+}
+
+static char	*get_abs(const char *binname, char **envp)
+{
+	char	*basename;
+	char	*res;
+
+	basename = ft_basename(binname);
+	res = ft_getpath(basename, envp);
+	free(basename);
+	return (res);
+}
+
 /*
  * If available, returns the path of a given binary.
+ * Current directory (./) is excluded.
+ * Any other form of relative path is made absolute.
+ * Ex: /usr/bin/../bin/ls -> /usr/bin/ls
  * */
 char	*ft_getpath(const char *binname, char **envp)
 {
@@ -30,6 +52,8 @@ char	*ft_getpath(const char *binname, char **envp)
 
 	if (!binname || !envp)
 		return (NULL);
+	if (!starts_with_cr(binname) && ft_file_isex(binname))
+		return (get_abs(binname, envp));
 	path_strarr = ft_environ_to_path_strarr(envp);
 	if (!path_strarr)
 		return (NULL);

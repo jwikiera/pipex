@@ -29,8 +29,6 @@ t_pipex	*init_pipex(void)
 	return (res);
 }
 
-/* pipex->commands is a 2d char array but individual strings are also in argv
- * and should be freed by the OS */
 void	free_pipex(t_pipex *pipex)
 {
 	size_t	i;

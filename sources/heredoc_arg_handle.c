@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_command_ex.c                                    :+:      :+:    :+:   */
+/*   heredoc_arg_handle.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwikiera <jwikiera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,15 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "pipex.h"
 
-int	ft_command_ex(const char *command, char **envp)
+int	heredoc_arg_handle(int argc, char *argv[], t_pipex *pipex)
 {
-	char	*res;
-
-	res = ft_getpath(command, envp);
-	if (res == NULL)
-		return (0);
-	free(res);
+	pipex->is_heredoc = 1;
+	(void) argc;
+	(void) argv;
+	(void) pipex;
 	return (1);
 }
