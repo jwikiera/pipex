@@ -12,58 +12,27 @@
 
 #include "pipex.h"
 
-static int	printf_cmn_ntfnd(char *command)
+/* file 1 is repurposed as the file to append to */
+/* file2 is repurposed as the heredoc buffer */
+static int	heredoc_arg_handle(int argc, char *argv[], t_pipex *pipex)
 {
-	if (!ft_ptstrfd_s("pipex: ", 2))
+	if (argc < 6)
+		return (pi_error("at least five arguments expected.\n", 0));
+	if (!handle_files_heredoc(argv[5], pipex))
 		return (0);
-	if (!ft_ptstrfd_s(command, 2))
+	pipex->is_heredoc = 1;
+	pipex->heredoc_lim = argv[2];
+	pipex->commandc = 2;
+	pipex->commands = malloc(sizeof(*pipex->commands) * 2);
+	if (!pipex->commands)
 		return (0);
-	if (!ft_ptstrfd_s(": command not found\n", 2))
+	pipex->commands[0] = parse_command(argv[3]);
+	pipex->commands[1] = parse_command(argv[4]);
+	if (!pipex->commands[0] || !pipex->commands[1])
+		return (0);
+	if (!handle_bins(pipex))
 		return (0);
 	return (1);
-}
-
-static int	transform_bin(size_t i, t_pipex *pipex)
-{
-	char	*bak;
-
-	bak = ft_strdup(pipex->commands[i][0]);
-	if (!bak)
-		return (0);
-	free(pipex->commands[i][0]);
-	pipex->commands[i][0] = NULL;
-	pipex->commands[i][0] = ft_getpath_current(bak, environ);
-	free(bak);
-	if (!pipex->commands[i][0])
-		return (0);
-	return (1);
-}
-
-static int	handle_bins(t_pipex *pipex)
-{
-	size_t	i;
-	int		errored;
-
-	i = 0;
-	errored = 0;
-	while (i < pipex->commandc)
-	{
-		if (ft_strarrlen(pipex->commands[i]) < 1)
-		{
-			errored = 1;
-			pi_error("command is empty", 0);
-		}
-		else if (!ft_command_ex_current(pipex->commands[i][0], environ))
-		{
-			if (printf_cmn_ntfnd(pipex->commands[i][0]))
-				return (0);
-			errored = 1;
-		}
-		else if (!transform_bin(i, pipex))
-			return (0);
-		i ++;
-	}
-	return (!errored);
 }
 
 static int	pipe_arg_handle(int argc, char *argv[], t_pipex *pipex)

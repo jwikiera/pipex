@@ -27,15 +27,27 @@ static int	starts_with_cr(const char *str)
 	return (str[0] == '.' && str[1] == ft_getsep());
 }
 
-static char	*get_abs(const char *binname, char **envp)
+static char	*get_abs(const char *binname, char **path_strarr)
 {
 	char	*basename;
-	char	*res;
+	size_t	i;
+	char	*full_path;
 
 	basename = ft_basename(binname);
-	res = ft_getpath(basename, envp);
+	i = 0;
+	while (path_strarr[i])
+	{
+		if (ft_bin_in_path(basename, path_strarr[i]))
+		{
+			full_path = ft_joinpaths(path_strarr[i], basename, NULL);
+			free_path_strarr(path_strarr);
+			free(basename);
+			return (full_path);
+		}
+		i ++;
+	}
 	free(basename);
-	return (res);
+	return (free_path_strarr(path_strarr));
 }
 
 /*
@@ -52,11 +64,11 @@ char	*ft_getpath(const char *binname, char **envp)
 
 	if (!binname || !envp)
 		return (NULL);
-	if (!starts_with_cr(binname) && ft_file_isex(binname))
-		return (get_abs(binname, envp));
 	path_strarr = ft_environ_to_path_strarr(envp);
 	if (!path_strarr)
 		return (NULL);
+	if (!starts_with_cr(binname) && ft_file_isex(binname))
+		return (get_abs(binname, path_strarr));
 	i = 0;
 	while (path_strarr[i])
 	{

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_files.c                                     :+:      :+:    :+:   */
+/*   handle_files_heredoc.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwikiera <jwikiera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,33 +12,22 @@
 
 #include "pipex.h"
 
-/* access in this case also tells us if the file exists */
-static int	fd_file1(const char *fname)
-{
-	if (!fname)
-	{
-		ft_putstr_fd("fd_file1: fname is NULL\n", 2);
-		return (-1);
-	}
-	if (access(fname, R_OK) == -1)
-	{
-		ft_putstr_fd("fd_file1: file not accessible or does not exist\n", 2);
-		return (-1);
-	}
-	return (open(fname, O_RDONLY));
-}
+/* file 1 is repurposed as the file to append to */
+/* file2 is repurposed as the heredoc buffer */
+/* at first file2 is only created */
+/* to read from it, it needs to be reopened */
 
-static int	fd_file2(const char *fname)
+static int	fd_file1(const char *fname)
 {
 	if (!fname)
 	{
 		ft_putstr_fd("fd_file2: fname is NULL\n", 2);
 		return (-1);
 	}
-	return (open(fname, O_WRONLY | O_CREAT | O_TRUNC, 0644));
+	return (open(fname, O_WRONLY | O_CREAT | O_APPEND, 0644));
 }
 
-int	handle_files(const char *fname1, const char *fname2, t_pipex *pipex)
+int	handle_files_heredoc(const char *fname1, t_pipex *pipex)
 {
 	pipex->file1_fd = fd_file1(fname1);
 	if (pipex->file1_fd == -1)
@@ -46,7 +35,10 @@ int	handle_files(const char *fname1, const char *fname2, t_pipex *pipex)
 		ft_putstr_fd("Failed to get file descriptor for file1\n", 2);
 		return (0);
 	}
-	pipex->file2_fd = fd_file2(fname2);
+	pipex->heredoc_fname = get_heredoc_tempfile();
+	if (!pipex->heredoc_fname)
+		return (0);
+	pipex->file2_fd = fd_file1(pipex->heredoc_fname);
 	if (pipex->file2_fd == -1)
 	{
 		ft_putstr_fd("Failed to get file descriptor for file2\n", 2);

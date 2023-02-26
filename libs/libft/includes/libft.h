@@ -128,6 +128,7 @@ int			ft_command_ex(const char *command, char **envp);
 int			ft_command_ex_current(const char *command, char **envp);
 char		*ft_basename(const char *path);
 t_list		*ft_lst_get(t_list *lst, ssize_t index);
+int			ft_append_to_file(const char *fname, const char *content);
 
 /* math */
 int			ft_min_int(int a, int b);

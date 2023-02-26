@@ -61,6 +61,7 @@ SOURCES_LIST			:= main.c\
 							init.c\
 							arg_handle.c\
 							handle_files.c\
+							handle_files_heredoc.c\
 							print_util.c\
 							pipe_handler.c\
 							pipe_handler_ret.c\
@@ -68,7 +69,8 @@ SOURCES_LIST			:= main.c\
 							parse_command.c\
 							del_node.c\
 							pi_error.c\
-							heredoc_arg_handle.c
+							get_heredoc_tempfile.c\
+							command_bin_handler.c
 HEADER_LIST				:= pipex.h
 HEADER_FILES			:= $(addprefix $(INCLUDE_DIR), $(HEADER_LIST))
 
@@ -132,11 +134,9 @@ re_pipex: clean_pipex all
 norm:
 	norminette includes/ sources/ libs/libft/ libs/libprintf/ 
 
-funcs: $(NAME) $(BONUS_NAME))
+funcs: $(NAME)
 	@echo "Functions used in $(NAME):"
 	nm -u $(NAME)
-	@echo "Functions used in $(BONUS_NAME):"
-	nm -u $(BONUS_NAME)
 
 francinette_lft:
 	cd libs/libft && cp includes/libft.h .

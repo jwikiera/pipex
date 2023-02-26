@@ -21,3 +21,4 @@ builds/*
 **/pipex
 file1
 file2
+pipex_heredoc_temp*

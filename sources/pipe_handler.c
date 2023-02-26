@@ -65,6 +65,7 @@ static void	handle_child_action(t_pipex *pipex, t_list *pipes, size_t i)
 	}
 	else
 	{
+		dup2(pipex->file2_fd, STDOUT_FILENO);
 		dup2(((int *)ft_lstlast(pipes)->content)[0], STDIN_FILENO);
 	}
 	close_all_pipes(pipes);

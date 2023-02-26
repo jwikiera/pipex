@@ -1,0 +1,1 @@
+make DEBUG=1 addressoff=1 && ./pipex here_doc LOL "./checker 2 1" "/usr/bin/../bin/awk '{ print tolower(\$0) }'" file3

@@ -31,7 +31,7 @@ static int	print_commands(t_pipex *pipex)
 	return (1);
 }
 
-int	print_pipex(t_pipex *pipex)
+static int	print1(t_pipex *pipex)
 {
 	if (!ft_printf("pipex struct @%x\n", &pipex))
 		return (0);
@@ -47,11 +47,28 @@ int	print_pipex(t_pipex *pipex)
 		return (0);
 	if (!ft_printf("is_heredoc: %d\n", pipex->is_heredoc))
 		return (0);
-	if (!ft_printf("heredoc_args: "))
+	return (1);
+}
+
+int	print_pipex(t_pipex *pipex)
+{
+	if (!print1(pipex))
 		return (0);
-	if (!ft_print_strarr(pipex->heredoc_args, pipex->heredoc_argc, 0))
+	if (!ft_printf("heredoc_lim: "))
 		return (0);
-	if (!ft_printf("\nheredoc_argc: %d\n", pipex->heredoc_argc))
+	if (pipex->heredoc_lim && !ft_ptstrfd_s(pipex->heredoc_lim, 1))
+		return (0);
+	else if (!pipex->heredoc_lim &&!ft_ptstrfd_s("(null)\n", 1))
+		return (0);
+	if (pipex->heredoc_lim && !ft_ptstrfd_s("\n", 1))
+		return (0);
+	if (!ft_printf("heredoc_fname: "))
+		return (0);
+	if (pipex->heredoc_lim && !ft_ptstrfd_s(pipex->heredoc_fname, 1))
+		return (0);
+	else if (!pipex->heredoc_fname &&!ft_ptstrfd_s("(null)\n", 1))
+		return (0);
+	if (pipex->heredoc_fname && !ft_ptstrfd_s("\n", 1))
 		return (0);
 	return (1);
 }

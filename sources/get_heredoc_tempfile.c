@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                            :+:      :+:    :+:   */
+/*   get_heredoc_tempfile.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwikiera <jwikiera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,45 +12,39 @@
 
 #include "pipex.h"
 
-t_pipex	*init_pipex(void)
+static char	*name_from_num(int num)
 {
-	t_pipex	*res;
+	char	*itoares;
+	char	*joinres;
 
-	res = malloc(sizeof(*res));
-	if (!res)
+	itoares = ft_itoa(num);
+	if (!itoares)
 		return (NULL);
-	res->is_heredoc = 0;
-	res->heredoc_lim = NULL;
-	res->heredoc_fname = NULL;
-	res->file1_fd = -1;
-	res->file2_fd = -1;
-	res->commands = NULL;
-	res->commandc = 0;
-	return (res);
+	joinres = ft_strjoin("pipex_heredoc_temp", itoares);
+	free(itoares);
+	return (joinres);
 }
 
-void	free_pipex(t_pipex *pipex)
+char	*get_heredoc_tempfile(void)
 {
-	size_t	i;
+	int		i;
+	char	*joinres;
 
-	if (pipex && pipex->heredoc_fname)
-		free(pipex->heredoc_fname);
-	if (pipex && pipex->commands)
+	if (ft_file_exists("pipex_heredoc_temp"))
 	{
 		i = 0;
-		while (i < pipex->commandc)
+		while (i < INT_MAX)
 		{
-			if (pipex->commands[i])
-				ft_free_split(pipex->commands[i],
-					ft_strarrlen(pipex->commands[i]));
+			joinres = name_from_num(i);
+			if (!joinres)
+				return (NULL);
+			if (!ft_file_exists(joinres))
+				return (joinres);
+			free(joinres);
 			i ++;
 		}
-		free(pipex->commands);
 	}
-	if (pipex)
-	{
-		close(pipex->file1_fd);
-		close(pipex->file2_fd);
-		free(pipex);
-	}
+	else
+		return (ft_strdup("pipex_heredoc_temp"));
+	return (NULL);
 }
