@@ -48,6 +48,7 @@ int		fd_file2(const char *fname);
 int		handle_files(const char *fname1, const char *fname2, t_pipex *pipex);
 int		print_pipex(t_pipex *pipex);
 int		handle_pipes(t_pipex *pipex);
+int		pipe_handler_ret(int status, t_list **pipes);
 void	handle_heredoc(t_pipex *pipex);
 char	**parse_command(char *command);
 void	pipex_del_node(void *content);

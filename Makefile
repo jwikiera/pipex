@@ -63,6 +63,7 @@ SOURCES_LIST			:= main.c\
 							handle_files.c\
 							print_util.c\
 							pipe_handler.c\
+							pipe_handler_ret.c\
 							heredoc_handler.c\
 							parse_command.c\
 							del_node.c\

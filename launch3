@@ -1,1 +1,1 @@
-make DEBUG=1 addressoff=1 && ./pipex file1 "./checker 2 1" "awk '{ print tolower(\$0) }'" "awk '{ print toupper(\$0) }'" file2
+make DEBUG=1 addressoff=1 && ./pipex file1 "./checker 2 1" "awk '{ print tolower(\$0) }'" "awk '{ print toupper(\$0) }'" "cut -c 1" file2

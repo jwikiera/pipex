@@ -58,7 +58,8 @@ static int	handle_bins(t_pipex *pipex)
 			if (printf_cmn_ntfnd(pipex->commands[i][0]))
 				return (0);
 			errored = 1;
-		} else if (!transform_bin(i, pipex))
+		}
+		else if (!transform_bin(i, pipex))
 			return (0);
 		i ++;
 	}
