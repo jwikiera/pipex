@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   ft_lst_get.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwikiera <jwikiera@student.42lausan>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,11 +12,24 @@
 
 #include "libft.h"
 
-t_list	*ft_lstlast(t_list *lst)
+/* gets t_list at index, supports negative indexes */
+t_list	*ft_lst_get(t_list *lst, ssize_t index)
 {
+	ssize_t	i;
+
 	if (!lst)
 		return (NULL);
-	while (lst->next)
+	if (index < 0)
+		index = ft_lstsize(lst) + index;
+	if (index < 0)
+		return (NULL);
+	i = 0;
+	while (lst)
+	{
+		if (i == index)
+			return (lst);
 		lst = lst->next;
-	return (lst);
+		i ++;
+	}
+	return (NULL);
 }

@@ -31,13 +31,14 @@ int	main(int argc, char *argv[])
 {
 	t_pipex	*pipex;
 
+	ft_printf("\n===============================\n\n");
 	pipex = init_pipex();
-	print_pipex(pipex);
+	//print_pipex(pipex);
 	if (!pipex)
 		handle_exit("failed to initialize pipex struct\n", 1, NULL);
 	if (!arg_handle(argc, argv, pipex))
 		handle_exit("invalid arguments\n", 2, pipex);
-	print_pipex(pipex);
+	//print_pipex(pipex);
 	if (pipex->is_heredoc)
 		handle_heredoc(pipex);
 	else
