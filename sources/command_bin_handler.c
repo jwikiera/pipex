@@ -12,7 +12,6 @@
 
 #include "pipex.h"
 
-/* apparently a command not existing is not a fatal error... */
 int	printf_cmn_ntfnd(char *command)
 {
 	if (!ft_ptstrfd_s("pipex: ", 2))
@@ -20,7 +19,7 @@ int	printf_cmn_ntfnd(char *command)
 	if (!ft_ptstrfd_s(command, 2))
 		return (0);
 	if (!ft_ptstrfd_s(": command not found\n", 2))
-		return (1);
+		return (0);
 	return (1);
 }
 
@@ -57,7 +56,7 @@ int	handle_bins(t_pipex *pipex)
 		}
 		else if (!ft_command_ex_current(pipex->commands[i][0], environ))
 		{
-			if (0 && printf_cmn_ntfnd(pipex->commands[i][0]))
+			if (!printf_cmn_ntfnd(pipex->commands[i][0]))
 				return (1);
 			errored = 0;
 		}

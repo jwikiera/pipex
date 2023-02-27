@@ -159,8 +159,6 @@ LIBR				:= ranlib
 
 all: $(NAME)
 
-bonus: all
-
 $(OBJECTS_DIRECTORY):
 	mkdir -p $(OBJECTS_DIRECTORY)
 # $(OBJECTS_DIRECTORY)%.o : $(SOURCES_DIRECTORY)%.c $(HEADERS)

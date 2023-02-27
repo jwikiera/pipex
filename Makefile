@@ -83,6 +83,8 @@ OBJECTS					:= $(addprefix $(OBJECTS_DIRECTORY), $(OBJECTS_LIST))
 
 all: $(NAME)
 
+bonus: all
+
 $(OBJECTS_DIRECTORY):
 	mkdir -p $(OBJECTS_DIRECTORY)
 

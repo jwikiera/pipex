@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include <sys/wait.h>
 
 static void	close_all_pipes(t_list *lst)
 {
@@ -39,12 +40,14 @@ static int	wait_for_all(t_list *ids)
 	iter = ids;
 	while (iter)
 	{
-		waitpid(*((int *)iter->content), &status, 0);
+		fprintf(stderr, "waiting for pid %d\n", *((int *)iter->content));
+		waitpid(*((int *)iter->content), &status, WEXITSTATUS);
+		fprintf(stderr, "got status %d\n", status);
 		if (status != 0)
 			failed = 1;
 		iter = iter->next;
 	}
-	return (1 || !failed);
+	return (status);
 }
 
 static void	handle_child_action(t_pipex *pipex, t_list *pipes, size_t i)
@@ -69,8 +72,12 @@ static void	handle_child_action(t_pipex *pipex, t_list *pipes, size_t i)
 		dup2(((int *)ft_lstlast(pipes)->content)[0], STDIN_FILENO);
 	}
 	close_all_pipes(pipes);
-	execve(pipex->commands[i][0], pipex->commands[i], environ);
-	exit(0);
+	if (i != 0 || (pipex->file1_fd != -1))
+	{
+		fprintf(stderr, "executing %s with pid %d\n", pipex->commands[i][0], getpid());
+		execve(pipex->commands[i][0], pipex->commands[i], environ);
+	}
+	exit(127);
 }
 
 static int	add_pipe(t_list **lst, const int p[2])
@@ -121,5 +128,5 @@ int	handle_pipes(t_pipex *pipex)
 		i ++;
 	}
 	close_all_pipes(pipes);
-	return (pipe_handler_ret(!wait_for_all(ids), &pipes, &ids));
+	return (pipe_handler_ret(wait_for_all(ids), &pipes, &ids));
 }

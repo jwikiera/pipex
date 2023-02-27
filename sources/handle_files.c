@@ -15,6 +15,9 @@
 /* access in this case also tells us if the file exists */
 static int	fd_file1(const char *fname)
 {
+	char	*joined;
+	char	*j2;
+
 	if (!fname)
 	{
 		ft_putstr_fd("fd_file1: fname is NULL\n", 2);
@@ -22,7 +25,15 @@ static int	fd_file1(const char *fname)
 	}
 	if (access(fname, R_OK) == -1)
 	{
-		ft_putstr_fd("fd_file1: file not accessible or does not exist\n", 2);
+		joined = ft_strjoin("no such file or directory: ", fname);
+		if (!joined)
+			return (-1);
+		j2 = ft_strjoin(joined, "\n");
+		free(joined);
+		if (!j2)
+			return (-1);
+		pi_error(j2, 0);
+		free(j2);
 		return (-1);
 	}
 	return (open(fname, O_RDONLY));
@@ -41,16 +52,14 @@ static int	fd_file2(const char *fname)
 int	handle_files(const char *fname1, const char *fname2, t_pipex *pipex)
 {
 	pipex->file1_fd = fd_file1(fname1);
-	if (pipex->file1_fd == -1)
+	if (0 && pipex->file1_fd == -1)
 	{
-		ft_putstr_fd("Failed to get file descriptor for file1\n", 2);
-		return (0);
+		return (1);
 	}
 	pipex->file2_fd = fd_file2(fname2);
 	if (pipex->file2_fd == -1)
 	{
-		ft_putstr_fd("Failed to get file descriptor for file2\n", 2);
-		return (0);
+		return (1);
 	}
 	return (1);
 }

@@ -42,6 +42,10 @@ int	main(int argc, char *argv[])
 		ret = handle_heredoc(pipex);
 	else
 		ret = handle_pipes(pipex);
+	if (!ft_command_ex_current(pipex->commands[pipex->commandc - 1][0], environ))
+		ret = 127;
+	if (pipex->file2_fd == -1)
+		ret = 1;
 	handle_exit(NULL, ret, pipex);
 	return (0);
 }

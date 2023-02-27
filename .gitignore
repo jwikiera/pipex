@@ -22,3 +22,5 @@ builds/*
 file1
 file2
 pipex_heredoc_temp*
+PIPEX_TESTER
+PIPEX_TESTER/*
