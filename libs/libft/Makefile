@@ -127,7 +127,9 @@ SRCS_OWN_LIST		:= ft_str_starts_ends_with.c\
 						ft_command_ex_current.c\
 						ft_basename.c\
 						ft_lst_get.c\
-						ft_append_to_file.c
+						ft_append_to_file.c\
+						ft_lstadd_int.c\
+						ft_lstadd_size_t.c
 OBJS_OWN_LIST		:= $(patsubst %.c, %.o, $(SRCS_OWN_LIST))
 OBJS_OWN			:= $(addprefix $(OBJECTS_DIRECTORY), $(OBJS_OWN_LIST))
 
@@ -156,6 +158,8 @@ LIBR				:= ranlib
 
 
 all: $(NAME)
+
+bonus: all
 
 $(OBJECTS_DIRECTORY):
 	mkdir -p $(OBJECTS_DIRECTORY)

@@ -12,8 +12,9 @@
 
 #include "pipex.h"
 
-int	pipe_handler_ret(int status, t_list **pipes)
+int	pipe_handler_ret(int status, t_list **pipes, t_list **ids)
 {
 	ft_lstclear(pipes, ft_delnode);
+	ft_lstclear(ids, ft_delnode);
 	return (status);
 }

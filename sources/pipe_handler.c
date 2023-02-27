@@ -28,23 +28,23 @@ static void	close_all_pipes(t_list *lst)
 	}
 }
 
-static int	wait_for_all(size_t proc_amount)
+static int	wait_for_all(t_list *ids)
 {
-	size_t	i;
+	t_list	*iter;
 	int		failed;
 	int		status;
 
 	failed = 0;
-	i = 0;
 	status = 0;
-	while (i < proc_amount)
+	iter = ids;
+	while (iter)
 	{
-		wait(&status);
+		waitpid(*((int *)iter->content), &status, 0);
 		if (status != 0)
 			failed = 1;
-		i ++;
+		iter = iter->next;
 	}
-	return (!failed);
+	return (1 || !failed);
 }
 
 static void	handle_child_action(t_pipex *pipex, t_list *pipes, size_t i)
@@ -70,7 +70,7 @@ static void	handle_child_action(t_pipex *pipex, t_list *pipes, size_t i)
 	}
 	close_all_pipes(pipes);
 	execve(pipex->commands[i][0], pipex->commands[i], environ);
-	exit(1);
+	exit(0);
 }
 
 static int	add_pipe(t_list **lst, const int p[2])
@@ -101,23 +101,25 @@ int	handle_pipes(t_pipex *pipex)
 	int		id;
 	int		p[2];
 	t_list	*pipes;
+	t_list	*ids;
 
 	i = 0;
 	pipes = NULL;
+	ids = NULL;
 	while (i < pipex->commandc)
 	{
-		if (pipex->commandc > 0 && i < pipex->commandc - 1)
-		{
-			if (pipe(p) == -1 || !add_pipe(&pipes, p))
-				return (pipe_handler_ret(0, &pipes));
-		}
+		if (pipex->commandc > 0 && i < pipex->commandc - 1
+			&& (pipe(p) == -1 || !add_pipe(&pipes, p)))
+			return (pipe_handler_ret(0, &pipes, &ids));
 		id = fork();
 		if (id == -1)
-			return (pipe_handler_ret(0, &pipes));
+			return (pipe_handler_ret(0, &pipes, &ids));
 		if (id == 0)
 			handle_child_action(pipex, pipes, i);
+		if (!ft_lstadd_int(id, &ids))
+			return (pipe_handler_ret(0, &pipes, &ids));
 		i ++;
 	}
 	close_all_pipes(pipes);
-	return (pipe_handler_ret(wait_for_all(pipex->commandc), &pipes));
+	return (pipe_handler_ret(!wait_for_all(ids), &pipes, &ids));
 }
