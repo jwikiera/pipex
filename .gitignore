@@ -24,3 +24,6 @@ file2
 pipex_heredoc_temp*
 PIPEX_TESTER
 PIPEX_TESTER/*
+pipexMedic
+pipexMedic/*
+test_prog

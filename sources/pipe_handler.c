@@ -32,19 +32,20 @@ static void	close_all_pipes(t_list *lst)
 static int	wait_for_all(t_list *ids)
 {
 	t_list	*iter;
-	int		failed;
+	//int		failed;
 	int		status;
 
-	failed = 0;
+	//failed = 0;
 	status = 0;
 	iter = ids;
 	while (iter)
 	{
-		fprintf(stderr, "waiting for pid %d\n", *((int *)iter->content));
-		waitpid(*((int *)iter->content), &status, WEXITSTATUS);
-		fprintf(stderr, "got status %d\n", status);
+		//fprintf(stderr, "waiting for pid %d\n", *((int *)iter->content));
+		waitpid(*((int *)iter->content), &status, 0);
+		//fprintf(stderr, "got status %d\n", status);
 		if (status != 0)
-			failed = 1;
+			status = WEXITSTATUS(status);
+			//failed = 1;
 		iter = iter->next;
 	}
 	return (status);
