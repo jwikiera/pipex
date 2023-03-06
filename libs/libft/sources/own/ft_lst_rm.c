@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_strarr.c                                  :+:      :+:    :+:   */
+/*   ft_lst_rm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwikiera <jwikiera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,46 +12,46 @@
 
 #include "libft.h"
 
-static int	print_empty(void)
+static void	del_middle(t_list **lst, int index)
 {
-	if (!ft_ptstrfd_s("NULL PTR", 1))
-		return (0);
-	return (1);
-}
+	int		i;
+	t_list	**iter;
+	t_list	*bak;
 
-static size_t	len_from_null_terminated(char **arr)
-{
-	size_t	len;
-
-	len = 0;
-	while (arr[len])
-		len ++;
-	return (len);
-}
-
-int	ft_print_strarr(char **arr, size_t len, int null_terminated)
-{
-	size_t	i;
-
-	if (!arr)
-		return (print_empty());
-	if (null_terminated)
-		len = len_from_null_terminated(arr);
-	if (!ft_ptstrfd_s("[", 1))
-		return (0);
+	iter = lst;
 	i = 0;
-	while (i < len)
+	while (i < index - 1)
 	{
-		if (!ft_ptstrfd_s(arr[i], 1))
-			return (0);
-		if (i < len - 1)
-		{
-			if (!ft_ptstrfd_s("|", 1))
-				return (0);
-		}
+		iter = &(*iter)->next;
 		i ++;
 	}
-	if (!ft_ptstrfd_s("]", 1))
-		return (0);
-	return (1);
+	bak = (*iter)->next->next;
+	ft_lstdelone((*iter)->next, ft_delnode);
+	(*iter)->next = bak;
+}
+
+/* Deletes a t_list node seamlessly (no gaps in resulting t_list) */
+void	ft_lst_rm(t_list **lst, int index)
+{
+	t_list	*bak;
+
+	if (ft_lstsize(*lst) == 0)
+		return ;
+	if (index < 0)
+		index = ft_lstsize(*lst) + index;
+	if (index < 0)
+		return ;
+	if (ft_lstsize(*lst) == 1 || index == ft_lstsize(*lst) - 1)
+	{
+		ft_lstdelone(*lst, ft_delnode);
+		return ;
+	}
+	if (index == 0)
+	{
+		bak = *lst;
+		*lst = (*lst)->next;
+		ft_lstdelone(bak, ft_delnode);
+		return ;
+	}
+	del_middle(lst, index);
 }

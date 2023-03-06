@@ -1,0 +1,58 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isescape.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jwikiera <jwikiera@student.42lausan>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/20 11:12:16 by jwikiera          #+#    #+#             */
+/*   Updated: 2022/10/20 11:12:18 by jwikiera         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+static int	prebackcnt(int pos, char *str)
+{
+	int	cnt;
+
+	cnt = 0;
+	while (ft_chareq(pos - (cnt + 1), str, '\\'))
+		cnt ++;
+	return (cnt);
+}
+
+static int	insidesinglequotes(int pos, char *str)
+{
+	int	cursor;
+	int	first_single_found;
+	int	second_single_found;
+
+	cursor = pos - 1;
+	first_single_found = 0;
+	second_single_found = 0;
+	while (cursor >= 0 && first_single_found == 0)
+	{
+		if (ft_chareq(cursor, str, '\'')
+			&& prebackcnt(cursor, str) % 2 == 0)
+			first_single_found = 1;
+		cursor --;
+	}
+	cursor = pos + 1;
+	while (cursor < (int)ft_strlen(str) && second_single_found == 0)
+	{
+		if (ft_chareq(cursor, str, '\'')
+			&& prebackcnt(cursor, str) % 2 == 0)
+			second_single_found = 1;
+		cursor ++;
+	}
+	return (first_single_found && second_single_found);
+}
+
+/* tells if a char at a given pos is a valid escape char */
+int	ft_isescape(int	pos, char *str)
+{
+	if (insidesinglequotes(pos, str))
+		return (0);
+	return (prebackcnt(pos, str) % 2 == 0);
+}

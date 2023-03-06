@@ -129,7 +129,15 @@ SRCS_OWN_LIST		:= ft_str_starts_ends_with.c\
 						ft_lst_get.c\
 						ft_append_to_file.c\
 						ft_lstadd_int.c\
-						ft_lstadd_size_t.c
+						ft_lstadd_size_t.c\
+						ft_remove_chr_lst.c\
+						ft_lst_rm.c\
+						ft_strarrjoin.c\
+						ft_prependstr2strarr.c\
+						ft_isescape.c\
+						ft_chareq.c\
+						ft_chr_escaped.c\
+						ft_quotesplit2.c
 OBJS_OWN_LIST		:= $(patsubst %.c, %.o, $(SRCS_OWN_LIST))
 OBJS_OWN			:= $(addprefix $(OBJECTS_DIRECTORY), $(OBJS_OWN_LIST))
 

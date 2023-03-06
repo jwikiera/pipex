@@ -1,0 +1,978 @@
+pipex being run
+pipex being run
+pipex being run
+pipex being run
+pipex being run
+---------
+argv[2]: grep Now
+argv[3]: exit 5
+pipes
+pipex being run
+---------
+argv[2]: grep Now
+argv[3]: wc -w
+pipes
+pipex being run
+---------
+argv[2]: grep Now
+argv[3]: wc -w
+pipes
+pipex being run
+---------
+argv[2]: grep Now
+argv[3]: wc -w
+pipes
+pipex being run
+---------
+argv[2]: grep Now
+argv[3]: wc -w
+pipes
+pipex being run
+---------
+argv[2]: grep Now
+argv[3]: wc -w
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: not-executable
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: not-executable
+pipes
+pipex being run
+---------
+argv[2]: grep Now
+argv[3]: wc -w
+pipes
+pipex being run
+---------
+argv[2]: env_var
+argv[3]: cat
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: hostname
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: hostname
+pipes
+pipex being run
+---------
+argv[2]: grep Now
+argv[3]: head -2
+pipes
+pipex being run
+---------
+argv[2]: grep Now
+argv[3]: head -2
+pipes
+pipex being run
+---------
+argv[2]: grep Now
+argv[3]: wc -w
+pipes
+pipex being run
+---------
+argv[2]: grep Now
+argv[3]: wc -w
+pipes
+pipex being run
+---------
+argv[2]: grep Now
+argv[3]: cat
+pipes
+pipex being run
+---------
+argv[2]: wc -w
+argv[3]: cat
+pipes
+pipex being run
+---------
+argv[2]: grep Now
+argv[3]: cat
+pipes
+pipex being run
+---------
+argv[2]: wc -w
+argv[3]: cat
+pipes
+pipex being run
+---------
+argv[2]: notexisting
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: notexisting
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: notexisting
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: notexisting
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: notexisting
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: notexisting
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: notexisting
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: notexisting
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: notexisting
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: notexisting
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: notexisting
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: notexisting
+pipes
+pipex being run
+---------
+argv[2]: grep Now
+argv[3]: /bin/cat
+pipes
+pipex being run
+---------
+argv[2]: grep Now
+argv[3]: /bin/cat
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: head -1
+pipes
+pipex being run
+---------
+argv[2]: grep Hello
+argv[3]: wc -l
+pipes
+pipex being run
+---------
+argv[2]: grep Hello
+argv[3]: wc -l
+pipes
+pipex being run
+---------
+argv[2]: grep Hello
+argv[3]: ls -l src/
+pipes
+pipex being run
+---------
+argv[2]: ls -l src/
+argv[3]: wc -l
+pipes
+pipex being run
+---------
+argv[2]: grep Hello
+argv[3]: awk '{count++} END {print count}'
+pipes
+pipex being run
+---------
+argv[2]: grep Hello
+argv[3]: awk "{count++} END {print count}"
+pipes
+pipex being run
+---------
+argv[2]: grep Hello
+argv[3]: awk '"{count++} END {print count}"'
+pipes
+pipex being run
+---------
+argv[2]: grep Hello
+argv[3]: awk "'{count++} END {print count}'"
+pipes
+pipex being run
+---------
+argv[2]: grep Hello
+argv[3]: wc -l
+pipes
+pipex being run
+---------
+argv[2]: grep Hello
+argv[3]: wc -l
+pipes
+pipex being run
+---------
+argv[2]: grep Hello
+argv[3]: wc -l
+pipes
+pipex being run
+---------
+argv[2]: grep Hello
+argv[3]: wc -l
+pipes
+pipex being run
+---------
+argv[2]: grep Hello
+argv[3]: wc -l
+pipes
+pipex being run
+---------
+argv[2]: fizzBuzz
+argv[3]: ls -l src/
+pipes
+pipex being run
+---------
+argv[2]: fizzBuzz
+argv[3]: ls -l src/
+pipes
+pipex being run
+---------
+argv[2]: ls -l src/
+argv[3]: buzzFizz
+pipes
+pipex being run
+---------
+argv[2]: ls -l src/
+argv[3]: buzzFizz
+pipes
+pipex being run
+---------
+argv[2]: fizzBuzz
+argv[3]: wc -l
+pipes
+pipex being run
+---------
+argv[2]: fizzBuzz
+argv[3]: wc -l
+pipes
+pipex being run
+---------
+argv[2]: fizzBuzz
+argv[3]: wc -l
+pipes
+pipex being run
+---------
+argv[2]: grep Hello
+argv[3]: buzzFizz
+pipes
+pipex being run
+---------
+argv[2]: grep Hello
+argv[3]: buzzFizz
+pipes
+pipex being run
+---------
+argv[2]: grep Hello
+argv[3]: buzzFizz
+pipes
+pipex being run
+---------
+argv[2]: sleep 3
+argv[3]: sleep 3
+pipes
+pipex being run
+---------
+argv[2]: grep Hello
+argv[3]: wc -l
+pipes
+pipex being run
+---------
+argv[2]: grep Hello
+argv[3]: wc -l
+pipes
+pipex being run
+---------
+argv[2]: grep Hello
+argv[3]: ls -l src/
+pipes
+pipex being run
+---------
+argv[2]: ls -l src/
+argv[3]: wc -l
+pipes
+pipex being run
+---------
+argv[2]: grep Hello
+argv[3]: awk '{count++} END {print count}'
+pipes
+pipex being run
+---------
+argv[2]: grep Hello
+argv[3]: awk "{count++} END {print count}"
+pipes
+pipex being run
+---------
+argv[2]: grep Hello
+argv[3]: awk '"{count++} END {print count}"'
+pipes
+pipex being run
+---------
+argv[2]: grep Hello
+argv[3]: awk "'{count++} END {print count}'"
+pipes
+pipex being run
+---------
+argv[2]: grep Hello
+argv[3]: wc -l
+pipes
+pipex being run
+---------
+argv[2]: grep Hello
+argv[3]: wc -l
+pipes
+pipex being run
+---------
+argv[2]: grep Hello
+argv[3]: wc -l
+pipes
+pipex being run
+---------
+argv[2]: grep Hello
+argv[3]: wc -l
+pipes
+pipex being run
+---------
+argv[2]: grep Hello
+argv[3]: wc -l
+pipes
+pipex being run
+---------
+argv[2]: fizzBuzz
+argv[3]: ls -l src/
+pipes
+pipex being run
+---------
+argv[2]: fizzBuzz
+argv[3]: ls -l src/
+pipes
+pipex being run
+---------
+argv[2]: ls -l src/
+argv[3]: buzzFizz
+pipes
+pipex being run
+---------
+argv[2]: ls -l src/
+argv[3]: buzzFizz
+pipes
+pipex being run
+---------
+argv[2]: fizzBuzz
+argv[3]: wc -l
+pipes
+pipex being run
+---------
+argv[2]: fizzBuzz
+argv[3]: wc -l
+pipes
+pipex being run
+---------
+argv[2]: fizzBuzz
+argv[3]: wc -l
+pipes
+pipex being run
+---------
+argv[2]: grep Hello
+argv[3]: buzzFizz
+pipes
+pipex being run
+---------
+argv[2]: grep Hello
+argv[3]: buzzFizz
+pipes
+pipex being run
+---------
+argv[2]: grep Hello
+argv[3]: buzzFizz
+pipes
+pipex being run
+---------
+argv[2]: sleep 3
+argv[3]: sleep 3
+pipes
+pipex being run
+---------
+argv[2]: ls -l src/
+argv[3]: grep .c
+argv[4]: wc -l
+pipes
+pipex being run
+---------
+argv[2]: tr -d !
+argv[3]: grep -v !
+argv[4]: sed 's/Hello/Salut/g'
+pipes
+pipex being run
+---------
+argv[2]: tr -d !
+argv[3]: grep -v !
+argv[4]: sed 's/Hello/Salut/g'
+argv[5]: grep Salut
+argv[6]: wc -l
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: sed    "s/And/But/"
+argv[3]: grep But
+pipes
+pipex being run
+---------
+argv[2]: sed "s/And/But/"
+argv[3]: awk '{count++} END {print count}'
+pipes
+pipex being run
+---------
+argv[2]: sed "s/And/But/"
+argv[3]: awk "{count++} END {print count}"
+pipes
+pipex being run
+---------
+argv[2]: sed "s/And/But/"
+argv[3]: awk "{count++} END {printf \"count: %i\" , count}"
+pipes
+pipex being run
+---------
+argv[2]: sed "s/And/But/"
+argv[3]: awk '{count++} END {printf "count: %i", count}'
+pipes
+pipex being run
+---------
+argv[2]: ./script.sh
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: ./script space.sh
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: ./script space.sh
+argv[3]: wc
+pipes
+pipex being run
+---------
+pipex being run
+---------
+argv[2]: ./script space.sh
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: ./script space.sh
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: /Users/jwikiera/francinette/tests/pipex/fsoares/script.sh
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: non_existent_comm
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: non_existent_comm
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: non_existent_comm
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: non_existent_comm
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: ./no_x_script.sh
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: ./no_x_script.sh
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: ./no_x_script.sh
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: ./no_x_script.sh
+pipes
+pipex being run
+---------
+argv[2]: ./middle_fail.sh
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: ./middle_fail.sh
+pipes
+pipex being run
+---------
+argv[2]: ./script.sh
+argv[3]: ./script.sh
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: ./script.sh
+argv[3]: ./script.sh
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: script.sh
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: uname
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: uname
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: subdir/script.sh
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: sleep 1
+argv[3]: sleep 3
+pipes
+pipex being run
+---------
+argv[2]: sleep 3
+argv[3]: sleep 1
+pipes
+pipex being run
+---------
+argv[2]: sleep 3
+argv[3]: sleep 3
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: sed    "s/And/But/"
+argv[3]: grep But
+pipes
+pipex being run
+---------
+argv[2]: sed "s/And/But/"
+argv[3]: awk '{count++} END {print count}'
+pipes
+pipex being run
+---------
+argv[2]: sed "s/And/But/"
+argv[3]: awk "{count++} END {print count}"
+pipes
+pipex being run
+---------
+argv[2]: sed "s/And/But/"
+argv[3]: awk "{count++} END {printf \"count: %i\" , count}"
+pipes
+pipex being run
+---------
+argv[2]: sed "s/And/But/"
+argv[3]: awk '{count++} END {printf "count: %i", count}'
+pipes
+pipex being run
+---------
+argv[2]: ./script.sh
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: ./script space.sh
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: ./script space.sh
+argv[3]: wc
+pipes
+pipex being run
+---------
+pipex being run
+---------
+argv[2]: ./script space.sh
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: ./script space.sh
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: /Users/jwikiera/francinette/tests/pipex/fsoares/script.sh
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: non_existent_comm
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: non_existent_comm
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: non_existent_comm
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: non_existent_comm
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: ./no_x_script.sh
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: ./no_x_script.sh
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: ./no_x_script.sh
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: ./no_x_script.sh
+pipes
+pipex being run
+---------
+argv[2]: ./middle_fail.sh
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: ./middle_fail.sh
+pipes
+pipex being run
+---------
+argv[2]: ./script.sh
+argv[3]: ./script.sh
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: ./script.sh
+argv[3]: ./script.sh
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: script.sh
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: uname
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: uname
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: subdir/script.sh
+argv[3]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: grep And
+argv[4]: cat -e
+argv[5]: wc
+pipes
+pipex being run
+---------
+argv[2]: cat
+argv[3]: grep And
+argv[4]: cat -e
+argv[5]: wc
+pipes
+pipex being run
+---------
+argv[2]: catasdasd
+argv[3]: asdasd
+argv[4]: sdfsdf
+argv[5]: fsdgss
+pipes
+pipex being run
+---------
+argv[2]: catasdasd
+argv[3]: asdasd
+argv[4]: sdfsdf
+argv[5]: fsdgss
+pipes
+pipex being run
+---------
+argv[2]: catasdasd
+argv[3]: asdasd
+argv[4]: sdfsdf
+argv[5]: fsdgss
+pipes
+pipex being run
+---------
+argv[2]: catasdasd
+argv[3]: asdasd
+argv[4]: sdfsdf
+argv[5]: fsdgss
+pipes
+pipex being run
+---------
+argv[2]: catasdasd
+argv[3]: asdasd
+argv[4]: sdfsdf
+argv[5]: fsdgss
+pipes
+pipex being run
+heredoc
+pipex being run
+heredoc
+pipex being run
+heredoc
+pipex being run
+heredoc
+pipex being run
+heredoc
+pipex being run
+---------
+argv[2]: sleep 1
+argv[3]: sleep 3
+argv[4]: sleep 2
+argv[5]: sleep 1
+pipes
+pipex being run
+---------
+argv[2]: sleep 1
+argv[3]: sleep 3
+argv[4]: sleep 2
+argv[5]: sleep 3
+pipes
+pipex being run
+heredoc
+pipex being run
+---------
+argv[2]: cat
+argv[3]: cat
+argv[4]: ls
+argv[5]: cat
+argv[6]: wc
+pipes
+pipex being run
+heredoc

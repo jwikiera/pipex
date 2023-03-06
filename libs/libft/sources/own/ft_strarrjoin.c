@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_strarr.c                                  :+:      :+:    :+:   */
+/*   ft_strarrjoin.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwikiera <jwikiera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,46 +12,45 @@
 
 #include "libft.h"
 
-static int	print_empty(void)
+static int	add_arr(t_list **lst, char **arr)
 {
-	if (!ft_ptstrfd_s("NULL PTR", 1))
-		return (0);
-	return (1);
-}
-
-static size_t	len_from_null_terminated(char **arr)
-{
-	size_t	len;
-
-	len = 0;
-	while (arr[len])
-		len ++;
-	return (len);
-}
-
-int	ft_print_strarr(char **arr, size_t len, int null_terminated)
-{
+	char	*tempdup;
 	size_t	i;
 
-	if (!arr)
-		return (print_empty());
-	if (null_terminated)
-		len = len_from_null_terminated(arr);
-	if (!ft_ptstrfd_s("[", 1))
-		return (0);
 	i = 0;
-	while (i < len)
+	while (i < ft_strarrlen(arr))
 	{
-		if (!ft_ptstrfd_s(arr[i], 1))
-			return (0);
-		if (i < len - 1)
+		tempdup = ft_strdup(arr[i]);
+		if (!tempdup)
 		{
-			if (!ft_ptstrfd_s("|", 1))
-				return (0);
+			ft_lstclear(lst, ft_delnode);
+			return (0);
+		}
+		if (!ft_lstadd_str(tempdup, lst))
+		{
+			free(tempdup);
+			ft_lstclear(lst, ft_delnode);
+			return (0);
 		}
 		i ++;
 	}
-	if (!ft_ptstrfd_s("]", 1))
-		return (0);
 	return (1);
+}
+
+/* joins two NULL terminated string arrays */
+char	**ft_strarrjoin(char **arr1, char **arr2)
+{
+	t_list	*lst;
+	char	**res;
+
+	if (!arr1 || !arr2)
+		return (NULL);
+	lst = NULL;
+	if (!add_arr(&lst, arr1))
+		return (NULL);
+	if (!add_arr(&lst, arr2))
+		return (NULL);
+	res = ft_tlst_to_strarr(lst);
+	ft_lstclear(&lst, ft_delnode);
+	return (res);
 }

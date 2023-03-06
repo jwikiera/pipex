@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_strarr.c                                  :+:      :+:    :+:   */
+/*   ft_quotesplit2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwikiera <jwikiera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,46 +12,45 @@
 
 #include "libft.h"
 
-static int	print_empty(void)
+static int	get_next_token(char *str_, char **child_content)
 {
-	if (!ft_ptstrfd_s("NULL PTR", 1))
-		return (0);
-	return (1);
+
 }
 
-static size_t	len_from_null_terminated(char **arr)
+static int	add_next_word(char *str_, t_list **tokenlst)
 {
-	size_t	len;
+	char	*child_content;
+	int		added;
 
-	len = 0;
-	while (arr[len])
-		len ++;
-	return (len);
+	child_content = NULL;
+	added = get_next_token(str_, &child_content);
+	if (!child_content)
+		return (-1);
+	if (!ft_lstadd_str(child_content, tokenlst))
+		return (-1);
+	return (added);
 }
 
-int	ft_print_strarr(char **arr, size_t len, int null_terminated)
+char	**ft_quotesplit2(char *str)
 {
+	t_list	*tokenlst;
 	size_t	i;
+	char	**res;
+	int		added;
 
-	if (!arr)
-		return (print_empty());
-	if (null_terminated)
-		len = len_from_null_terminated(arr);
-	if (!ft_ptstrfd_s("[", 1))
-		return (0);
+	tokenlst = NULL;
 	i = 0;
-	while (i < len)
+	while (i < ft_strlen(str))
 	{
-		if (!ft_ptstrfd_s(arr[i], 1))
-			return (0);
-		if (i < len - 1)
+		added = add_next_word(str + i, &tokenlst);
+		if (added == -1)
 		{
-			if (!ft_ptstrfd_s("|", 1))
-				return (0);
+			ft_lstclear(&tokenlst, ft_delnode);
+			return (NULL);
 		}
-		i ++;
+		i += added;
 	}
-	if (!ft_ptstrfd_s("]", 1))
-		return (0);
-	return (1);
+	res = ft_tlst_to_strarr(tokenlst);
+	ft_lstclear(&tokenlst, ft_delnode);
+	return (res);
 }

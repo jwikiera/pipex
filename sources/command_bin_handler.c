@@ -18,7 +18,8 @@ int	printf_cmn_ntfnd(char *command)
 		return (0);
 	if (!ft_ptstrfd_s(command, 2))
 		return (0);
-	if (!ft_ptstrfd_s(": command not found\n", 2))
+	if (!ft_ptstrfd_s(": command "
+					  "not found\n", 2))
 		return (0);
 	return (1);
 }

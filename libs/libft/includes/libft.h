@@ -81,56 +81,180 @@ void		ft_lstiter(t_list *lst, void (*f)(void *));
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 /* more own utils */
+
+/* counts words in a string accoridng to separator */
 int			count_words(char const *str, char sep);
+
+/* if string starts with a given char */
 int			ft_str_startswith(const char *str, const char *needle);
+
+/* if string ends with a given char */
 int			ft_str_endswith(const char *str, const char *needle);
+
+/* returns copy of src pointer plus new_len */
 void		*ft_realloc_gnl(void *src, size_t new_len);
+
+/* returns copy of intarr plus new_size */
 int			*ft_realloc_intarr(int *src, size_t arr_size, size_t new_size);
+
+/* returns copy of in2dtarr plus new_size */
 int			**ft_realloc_int2darr(int **src, size_t elem_size,
 				size_t arr_size, size_t new_size);
+
+/* returns copy of chararr plus new_size */
 char		*ft_realloc_chararr(char *src, size_t arr_size, size_t new_size);
+
+/* tells if a string is a valid integer */
 int			ft_str_is_int(const char *str);
+
+/* trims whitespaces plus given set */
 char		*ft_powertrim(const char *str, const char *set);
+
+/* trims whitespaces plus given char */
 char		*ft_powertrim_chr(const char *str, char c);
+
+/* tells if a char is a space (tab, etc) */
 int			ft_isspace(char c);
+
+/* atoi but on longs */
 long		ft_atoi_l(const char *nptr);
+
+/* gets sign of a string representing a number */
 int			ft_get_str_sign(const char *str);
+
+/* frees a non NULL-terminated string array */
 void		ft_free_split(char **split_res, size_t size);
+
+/* index of int in an intarr. -1 if not found */
 int			ft_index_of_int(const int *arr, int size, int target);
+
+/* if an intarr is sorted */
 int			ft_array_is_sorted(const int *arr, size_t len);
+
+/* returns sorted copy of an intarr */
 int			*ft_intarr_bubblesort(const int *arr, size_t len);
+
+/* put string on fd, if successful, returns 1, otherwise 0 */
 ssize_t		ft_ptstrfd_s(const char *s, int fd);
+
+/* prints a string array, null terminated or not */
 int			ft_print_strarr(char **arr, size_t len, int null_terminated);
+
+/* ft_print_strarr plus newline */
 int			ft_println_strarr(char **arr, size_t len, int null_terminated);
+
+/* t_list with strings to NULL-terminated string array */
 char		**ft_tlst_to_strarr(t_list *lst);
-size_t		ft_strarrlen(char **strarr);
-int			ft_isblankstr(const char *str);
-char		**ft_splitset(char const *str, const char *sep);
-int			ft_chr_in_str(char c, const char *str);
+
+/* t_list with CHARS to a single string */
 char		*ft_tlst_to_str(t_list *lst);
+
+/* ft_tlst_to_str but with a given separator */
 char		*ft_tlst_to_str_join(t_list *lst, char sep);
-void		ft_delnode(void *content);
-int			ft_lstadd_chr(char c, t_list **lst);
-int			ft_lstadd_str(char *str, t_list **lst);
-char		**ft_quote_split(const char *str, const char *set);
-char		**ft_environ_to_path_strarr(char **envp);
-char		*ft_getpath(const char *binname, char **envp);
-char		*ft_getpath_current(const char *binname, char **envp);
-int			ft_bin_in_path(const char *binname, const char *path);
-int			ft_file_exists(const char *fname);
-int			ft_file_isex(const char *fname);
-char		*ft_joinpaths(const char *path, ...);
-char		ft_getsep(void);
-char		*ft_strjoin_chr_str(char c, const char *str);
+
+/* t_list with STRINGS to a single string */
 char		*ft_str_tlst_to_str(t_list *lst);
+
+/* ft_str_tlst_to_str but with a given separator */
 char		*ft_str_tlst_to_str_join(t_list *lst, char sep);
+
+/* size of NULL-terminated strarr */
+size_t		ft_strarrlen(char **strarr);
+
+/* if string is empty or composed solely of spaces */
+int			ft_isblankstr(const char *str);
+
+/* ft_split but splits according to a set of chars */
+char		**ft_splitset(char const *str, const char *sep);
+
+/* if a char is in a string */
+int			ft_chr_in_str(char c, const char *str);
+
+/* frees whatever content points at */
+void		ft_delnode(void *content);
+
+/* adds a char to a t_list, under the form of a NULL-terminated string */
+int			ft_lstadd_chr(char c, t_list **lst);
+
+/* adds a string to a t_list */
+int			ft_lstadd_str(char *str, t_list **lst);
+
+/* splits a string according to given set of quotes, also handles backslashes */
+char		**ft_quote_split(const char *str, const char *set);
+
+/* second quote split attempt with proper escaping */
+char		**ft_quotesplit2(char *str);
+
+/* extracts PATHS as a NULL-terminates strarr from the global environ var */
+char		**ft_environ_to_path_strarr(char **envp);
+
+/* gets the full path of a binary, excluding local scripts */
+char		*ft_getpath(const char *binname, char **envp);
+
+/* ft_getpath but also searches current directory */
+/* [!] current dir scripts are not transformed in absolute paths */
+char		*ft_getpath_current(const char *binname, char **envp);
+
+/* checks if a binary is in the PATH */
+int			ft_bin_in_path(const char *binname, const char *path);
+
+/* checks if open returns 0 for a given fname */
+int			ft_file_exists(const char *fname);
+
+/* checks access(fname, X_OK) on given fname */
+int			ft_file_isex(const char *fname);
+
+/* joins an arbitrary amount of path strings */
+char		*ft_joinpaths(const char *path, ...);
+
+/* gets system path separator, as defined in libft.h */
+char		ft_getsep(void);
+
+/* prepends a char to a string */
+char		*ft_strjoin_chr_str(char c, const char *str);
+
+/* checks if an executable exists at given command string */
+/* current execution dir excluded from PATH */
 int			ft_command_ex(const char *command, char **envp);
+
+/* ft_command_ex but includes current path in PATH */
 int			ft_command_ex_current(const char *command, char **envp);
+
+/* Gets base file name from a path. Ex: /home/user/test -> test */
 char		*ft_basename(const char *path);
+
+/* gets t_list at given index. negative indexes work too */
 t_list		*ft_lst_get(t_list *lst, ssize_t index);
+
+/* appends string to given file */
 int			ft_append_to_file(const char *fname, const char *content);
+
+/* appends an integer to a t_list */
 int			ft_lstadd_int(int i, t_list **lst);
+
+/* appends a size_t to a t_list */
 int			ft_lstadd_size_t(size_t i, t_list **lst);
+
+/* removes t_list at given index, while keeping continuity of the list */
+void		ft_lst_rm(t_list **lst, int index);
+
+/* removes all occurences of a char in a t_list with chars */
+void		ft_remove_chr_lst(t_list **lst, char c);
+
+/* joins two NULL-terminated strarrs together */
+char		**ft_strarrjoin(char **arr1, char **arr2);
+
+/* prepends a string to a NULL-terminates strarr */
+char		**ft_prependstr2strarr(char *str, char **arr);
+
+/* if a char at a given pos is a valid escape char */
+int			ft_isescape(int	pos, char *str);
+
+/* if char at given index in str is equal to given char */
+int			ft_chareq(int pos, char *str, char c);
+
+/* if a char at a position is escaped */
+int			ft_chr_escaped(int pos, char *str);
 
 /* math */
 int			ft_min_int(int a, int b);

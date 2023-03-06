@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_strarr.c                                  :+:      :+:    :+:   */
+/*   ft_chr_escaped.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwikiera <jwikiera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,46 +12,7 @@
 
 #include "libft.h"
 
-static int	print_empty(void)
+int	ft_chr_escaped(int pos, char *str)
 {
-	if (!ft_ptstrfd_s("NULL PTR", 1))
-		return (0);
-	return (1);
-}
-
-static size_t	len_from_null_terminated(char **arr)
-{
-	size_t	len;
-
-	len = 0;
-	while (arr[len])
-		len ++;
-	return (len);
-}
-
-int	ft_print_strarr(char **arr, size_t len, int null_terminated)
-{
-	size_t	i;
-
-	if (!arr)
-		return (print_empty());
-	if (null_terminated)
-		len = len_from_null_terminated(arr);
-	if (!ft_ptstrfd_s("[", 1))
-		return (0);
-	i = 0;
-	while (i < len)
-	{
-		if (!ft_ptstrfd_s(arr[i], 1))
-			return (0);
-		if (i < len - 1)
-		{
-			if (!ft_ptstrfd_s("|", 1))
-				return (0);
-		}
-		i ++;
-	}
-	if (!ft_ptstrfd_s("]", 1))
-		return (0);
-	return (1);
+	return (ft_isescape(pos - 1, str));
 }

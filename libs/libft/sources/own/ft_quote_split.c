@@ -19,6 +19,7 @@ static int	wordbuffer2wordlst(t_list **current_word_chrs, t_list **word_lst)
 
 	if (*current_word_chrs == NULL)
 		return (1);
+	ft_remove_chr_lst(current_word_chrs, '\\');
 	word = ft_tlst_to_str(*current_word_chrs);
 	ft_lstclear(current_word_chrs, ft_delnode);
 	*current_word_chrs = NULL;
@@ -69,7 +70,7 @@ int	one_loop(int *current_sep, char str_i, const char *set, t_list **lsts[2])
 		if (!wordbuffer2wordlst(current_word_chrs, word_lst))
 			return (0);
 	}
-	else if (*current_sep != -1 && str_i == *current_sep)
+	else if (*current_sep != -1 && str_i == *current_sep && (!ft_lst_get(*current_word_chrs, -1) || (ft_lst_get(*current_word_chrs, -1) && ((char *)ft_lst_get(*current_word_chrs, -1)->content)[0] != '\\')))
 	{
 		*current_sep = -1;
 		if (!wordbuffer2wordlst(current_word_chrs, word_lst))

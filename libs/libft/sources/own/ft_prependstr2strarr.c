@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_strarr.c                                  :+:      :+:    :+:   */
+/*   ft_prependstr2strarr.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwikiera <jwikiera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,46 +12,27 @@
 
 #include "libft.h"
 
-static int	print_empty(void)
+char	**ft_prependstr2strarr(char *str, char **arr)
 {
-	if (!ft_ptstrfd_s("NULL PTR", 1))
-		return (0);
-	return (1);
-}
+	t_list	*one_lst;
+	char	*strcp;
+	char	**onearr;
+	char	**res;
 
-static size_t	len_from_null_terminated(char **arr)
-{
-	size_t	len;
-
-	len = 0;
-	while (arr[len])
-		len ++;
-	return (len);
-}
-
-int	ft_print_strarr(char **arr, size_t len, int null_terminated)
-{
-	size_t	i;
-
-	if (!arr)
-		return (print_empty());
-	if (null_terminated)
-		len = len_from_null_terminated(arr);
-	if (!ft_ptstrfd_s("[", 1))
-		return (0);
-	i = 0;
-	while (i < len)
+	one_lst = NULL;
+	strcp = ft_strdup(str);
+	if (!strcp)
+		return (NULL);
+	if (!ft_lstadd_str(strcp, &one_lst))
 	{
-		if (!ft_ptstrfd_s(arr[i], 1))
-			return (0);
-		if (i < len - 1)
-		{
-			if (!ft_ptstrfd_s("|", 1))
-				return (0);
-		}
-		i ++;
+		free(strcp);
+		return (NULL);
 	}
-	if (!ft_ptstrfd_s("]", 1))
-		return (0);
-	return (1);
+	onearr = ft_tlst_to_strarr(one_lst);
+	ft_lstclear(&one_lst, ft_delnode);
+	if (!onearr)
+		return (NULL);
+	res = ft_strarrjoin(onearr, arr);
+	ft_free_split(onearr, ft_strarrlen(onearr));
+	return (res);
 }

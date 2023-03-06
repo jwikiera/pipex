@@ -32,20 +32,15 @@ static void	close_all_pipes(t_list *lst)
 static int	wait_for_all(t_list *ids)
 {
 	t_list	*iter;
-	//int		failed;
 	int		status;
 
-	//failed = 0;
 	status = 0;
 	iter = ids;
 	while (iter)
 	{
-		//fprintf(stderr, "waiting for pid %d\n", *((int *)iter->content));
 		waitpid(*((int *)iter->content), &status, 0);
-		//fprintf(stderr, "got status %d\n", status);
 		if (status != 0)
 			status = WEXITSTATUS(status);
-			//failed = 1;
 		iter = iter->next;
 	}
 	return (status);
@@ -69,13 +64,13 @@ static void	handle_child_action(t_pipex *pipex, t_list *pipes, size_t i)
 	}
 	else
 	{
-		dup2(pipex->file2_fd, STDOUT_FILENO);
+		//dup2(pipex->file2_fd, STDOUT_FILENO);
 		dup2(((int *)ft_lstlast(pipes)->content)[0], STDIN_FILENO);
 	}
 	close_all_pipes(pipes);
 	if (i != 0 || (pipex->file1_fd != -1))
 	{
-		fprintf(stderr, "executing %s with pid %d\n", pipex->commands[i][0], getpid());
+		//fprintf(stderr, "executing %s with pid %d\n", pipex->commands[i][0], getpid());
 		execve(pipex->commands[i][0], pipex->commands[i], environ);
 	}
 	exit(127);

@@ -32,17 +32,27 @@ int	main(int argc, char *argv[])
 	t_pipex	*pipex;
 	int		ret;
 
+	//fprintf(fopen("/Users/jwikiera/Projets/pipex/arglog.txt", "a"), "pipex being run\n");
 	pipex = init_pipex();
 	if (!pipex)
 		handle_exit("failed to initialize pipex struct\n", 1, NULL);
 	if (!arg_handle(argc, argv, pipex))
 		handle_exit("invalid arguments\n", 2, pipex);
 	ret = 0;
+	//print_pipex(pipex);
 	if (pipex->is_heredoc)
+	{
+		//fprintf(fopen("/Users/jwikiera/Projets/pipex/arglog.txt", "a"), "heredoc\n");
 		ret = handle_heredoc(pipex);
+	}
 	else
+	{
+		//fprintf(fopen("/Users/jwikiera/Projets/pipex/arglog.txt", "a"), "pipes\n");
 		ret = handle_pipes(pipex);
-	if (!ft_command_ex_current(pipex->commands[pipex->commandc - 1][0], environ))
+	}
+	if (ft_file_exists(pipex->commands[pipex->commandc - 1][0]) && !ft_command_ex_current(pipex->commands[pipex->commandc - 1][0], environ))
+		ret = 126;
+	else if (!ft_command_ex_current(pipex->commands[pipex->commandc - 1][0], environ))
 		ret = 127;
 	if (pipex->file2_fd == -1)
 		ret = 1;

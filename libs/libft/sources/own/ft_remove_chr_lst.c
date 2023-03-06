@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_strarr.c                                  :+:      :+:    :+:   */
+/*   ft_remove_chr_lst.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwikiera <jwikiera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,46 +12,37 @@
 
 #include "libft.h"
 
-static int	print_empty(void)
+static int	lst_has_c(t_list *lst, char c)
 {
-	if (!ft_ptstrfd_s("NULL PTR", 1))
-		return (0);
-	return (1);
-}
+	int	i;
 
-static size_t	len_from_null_terminated(char **arr)
-{
-	size_t	len;
-
-	len = 0;
-	while (arr[len])
-		len ++;
-	return (len);
-}
-
-int	ft_print_strarr(char **arr, size_t len, int null_terminated)
-{
-	size_t	i;
-
-	if (!arr)
-		return (print_empty());
-	if (null_terminated)
-		len = len_from_null_terminated(arr);
-	if (!ft_ptstrfd_s("[", 1))
-		return (0);
 	i = 0;
-	while (i < len)
+	while (i < ft_lstsize(lst))
 	{
-		if (!ft_ptstrfd_s(arr[i], 1))
-			return (0);
-		if (i < len - 1)
-		{
-			if (!ft_ptstrfd_s("|", 1))
-				return (0);
-		}
+		if (((char *)ft_lst_get(lst, i)->content)[0] == c)
+			return (1);
 		i ++;
 	}
-	if (!ft_ptstrfd_s("]", 1))
-		return (0);
-	return (1);
+	return (0);
+}
+
+/* removes all occurences of c in a t_list */
+void	ft_remove_chr_lst(t_list **lst, char c)
+{
+	int		i;
+	//t_list	*next;
+
+	while (lst_has_c(*lst, c))
+	{
+		i = 0;
+		while (i < ft_lstsize(*lst))
+		{
+			if (((char *)ft_lst_get(*lst, i)->content)[0] == c)
+			{
+				ft_lst_rm(lst, i);
+				break ;
+			}
+			i ++;
+		}
+	}
 }
