@@ -12,9 +12,45 @@
 
 #include "libft.h"
 
-static int	get_next_token(char *str_, char **child_content)
+/*static int	remove_specials(char ***splt)
 {
+	(void) splt;
+	return 0;
+}*/
 
+/* slice by isspace */
+static int	get_next_token(char *s, char **child_content)
+{
+	t_list	*word;
+	char	c;
+	int		i;
+
+	i = 0;
+	word = NULL;
+	c = ' ';
+	*child_content = NULL;
+	while(s[i] && c != '!')
+	{
+		if (c == ' ' && s[i] == '"'
+			&& !ft_chr_escaped(i, s))
+			c = '"';
+		else if (c == ' ' && s[i] == '\''
+				 && !ft_chr_escaped(i, s))
+			c = '\'';
+		else if (((ft_isspace(c) && ft_isspace(s[i]))
+				|| (c == '"' && s[i] == '"') || (c == '\'' && s[i] == '\''))
+				 && !ft_chr_escaped(i, s))
+			c = '!';
+		if (s[i] != c && !ft_lstadd_chr(s[i], &word))
+		{
+			ft_lstclear(&word, ft_delnode);
+			return (-1);
+		}
+		i ++;
+	}
+	*child_content = ft_tlst_to_str(word);
+	ft_lstclear(&word, ft_delnode);
+	return (1);
 }
 
 static int	add_next_word(char *str_, t_list **tokenlst)
