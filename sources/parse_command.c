@@ -21,13 +21,13 @@
 static char	*get_cmd(char *command)
 {
 	char	*trimmed;
-	size_t	i;
+	int		i;
 	char	*tmp;
 
 	trimmed = ft_powertrim(command, "");
 	if (!trimmed)
 		return (NULL);
-	i = ft_strlen(trimmed) - 1;
+	i = (int)ft_strlen(trimmed) - 1;
 	while (i >= 0)
 	{
 		tmp = malloc(sizeof (*tmp) * (ft_strlen(trimmed) - i + 1));

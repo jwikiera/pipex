@@ -47,11 +47,19 @@ static int	my_atoi(const char *nptr)
 	return (res * sign);
 }
 
+extern char  **environ;
 
+#include "unistd.h"
+#include "stdlib.h"
+#include "stdio.h"
 int main(int argc, char *argv[])
 {
 	if (argc == 1)
 		exit (69);
+	char *prog = "./test script.sh";
+	fprintf(stderr, "executing prog %s\n", prog);
+	int res = execve(prog, NULL, environ);
+	fprintf(stderr, "res: %d\n", res);
 	exit (my_atoi(argv[1]));
 	return (0);
 }

@@ -50,7 +50,6 @@ int		handle_pipes(t_pipex *pipex);
 int		pipe_handler_ret(int status, t_list **pipes, t_list **ids);
 int		handle_heredoc(t_pipex *pipex);
 char	**parse_command(char *command);
-void	pipex_del_node(void *content);
 int		pi_error(char *msg, int ret);
 char	*get_heredoc_tempfile(void);
 int		handle_files_heredoc(const char *fname1, t_pipex *pipex);

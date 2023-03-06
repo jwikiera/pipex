@@ -17,8 +17,10 @@ static int	prebackcnt(int pos, char *str)
 	int	cnt;
 
 	cnt = 0;
-	while (ft_chareq(pos - (cnt + 1), str, '\\'))
-		cnt ++;
+	//while (ft_chareq(pos - (cnt + 1), str, '\\'))
+	int curpos = pos - (cnt + 1);
+	while (str[curpos] == '\\')
+	{cnt ++; curpos = pos - (cnt + 1);}
 	return (cnt);
 }
 

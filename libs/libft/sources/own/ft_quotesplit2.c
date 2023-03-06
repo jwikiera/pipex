@@ -41,7 +41,7 @@ static int	get_next_token(char *s, char **child_content)
 				|| (c == '"' && s[i] == '"') || (c == '\'' && s[i] == '\''))
 				 && !ft_chr_escaped(i, s))
 			c = '!';
-		if (s[i] != c && !ft_lstadd_chr(s[i], &word))
+		if (s[i] != ft_isspace(c) && !ft_lstadd_chr(s[i], &word))
 		{
 			ft_lstclear(&word, ft_delnode);
 			return (-1);
@@ -50,7 +50,7 @@ static int	get_next_token(char *s, char **child_content)
 	}
 	*child_content = ft_tlst_to_str(word);
 	ft_lstclear(&word, ft_delnode);
-	return (1);
+	return ((int)ft_strlen(*child_content));
 }
 
 static int	add_next_word(char *str_, t_list **tokenlst)
