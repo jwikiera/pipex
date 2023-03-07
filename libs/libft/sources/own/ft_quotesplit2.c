@@ -12,11 +12,33 @@
 
 #include "libft.h"
 
-/*static int	remove_specials(char ***splt)
+static int	end_of_word(char c, char *s, int i)
 {
-	(void) splt;
-	return 0;
-}*/
+	return (((ft_isspace(c) && ft_isspace(s[i]))
+			|| (c == '"' && s[i] == '"') || (c == '\'' && s[i] == '\''))
+		&& !ft_chr_escaped(i, s));
+}
+
+static int	next_token_ret(t_list **word, char **child_content, int len, int succeeded)
+{
+	char	*tmp;
+
+	if (succeeded)
+	{
+		tmp = ft_tlst_to_str(*word);
+		if (!tmp)
+		{
+			ft_lstclear(word, ft_delnode);
+			return (-1);
+		}
+		*child_content = ft_powertrim(tmp, "");
+		free(tmp);
+		ft_lstclear(word, ft_delnode);
+		return (len);
+	}
+	ft_lstclear(word, ft_delnode);
+	return (-1);
+}
 
 /* slice by isspace */
 static int	get_next_token(char *s, char **child_content)
@@ -29,28 +51,23 @@ static int	get_next_token(char *s, char **child_content)
 	word = NULL;
 	c = ' ';
 	*child_content = NULL;
-	while(s[i] && c != '!')
+	while (ft_isspace(s[i]))
+		i ++;
+	while (s[i] && c != '!')
 	{
 		if (c == ' ' && s[i] == '"'
 			&& !ft_chr_escaped(i, s))
 			c = '"';
 		else if (c == ' ' && s[i] == '\''
-				 && !ft_chr_escaped(i, s))
+			&& !ft_chr_escaped(i, s))
 			c = '\'';
-		else if (((ft_isspace(c) && ft_isspace(s[i]))
-				|| (c == '"' && s[i] == '"') || (c == '\'' && s[i] == '\''))
-				 && !ft_chr_escaped(i, s))
+		else if (end_of_word(c, s, i))
 			c = '!';
 		if (s[i] != ft_isspace(c) && !ft_lstadd_chr(s[i], &word))
-		{
-			ft_lstclear(&word, ft_delnode);
-			return (-1);
-		}
+			return (next_token_ret(&word, child_content, i, 0));
 		i ++;
 	}
-	*child_content = ft_tlst_to_str(word);
-	ft_lstclear(&word, ft_delnode);
-	return ((int)ft_strlen(*child_content));
+	return (next_token_ret(&word, child_content, i, 1));
 }
 
 static int	add_next_word(char *str_, t_list **tokenlst)
@@ -59,10 +76,14 @@ static int	add_next_word(char *str_, t_list **tokenlst)
 	int		added;
 
 	child_content = NULL;
+	if (ft_isblankstr(str_))
+		return ((int) ft_strlen(str_));
 	added = get_next_token(str_, &child_content);
 	if (!child_content)
 		return (-1);
 	if (!ft_lstadd_str(child_content, tokenlst))
+		return (-1);
+	if (added == -1)
 		return (-1);
 	return (added);
 }
@@ -88,5 +109,7 @@ char	**ft_quotesplit2(char *str)
 	}
 	res = ft_tlst_to_strarr(tokenlst);
 	ft_lstclear(&tokenlst, ft_delnode);
+	if (!clean_qt2splt(&res))
+		return (NULL);
 	return (res);
 }

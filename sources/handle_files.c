@@ -25,7 +25,7 @@ static int	fd_file1(const char *fname)
 	}
 	if (access(fname, R_OK) == -1)
 	{
-		joined = ft_strjoin("no such file or directory: ", fname);
+		joined = ft_strjoin( fname, ": No such file or directory");
 		if (!joined)
 			return (-1);
 		j2 = ft_strjoin(joined, "\n");

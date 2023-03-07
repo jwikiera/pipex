@@ -50,8 +50,8 @@ static int	pipe_arg_handle(int argc, char *argv[], t_pipex *pipex)
 	while (i < argc - 1)
 	{
 		///////pipex->commands[i - 2] = parse_command(argv[i]);
+		//fprintf(stderr, "argv[%d]: %s\n", i, argv[i]);
 		pipex->commands[i - 2] = ft_quotesplit2(argv[i]);
-		fprintf(stderr, "argv[%d]: %s\n", i, argv[i]);
 		//fprintf(fopen("/Users/jwikiera/Projets/pipex/arglog.txt", "a"), "argv[%d]: %s\n", i, argv[i]);
 		//fprintf(stderr, "argv[%d]: %s\n", i, argv[i]);
 		//fprintf(stdout, "strarr of parsed (len of array is %zu): \n", ft_strarrlen(pipex->commands[i - 2]));

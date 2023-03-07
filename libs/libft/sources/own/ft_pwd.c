@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_remove_chr_lst.c                                :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwikiera <jwikiera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,36 +12,7 @@
 
 #include "libft.h"
 
-static int	lst_has_c(t_list *lst, char c)
+char	*ft_pwd(char **envp)
 {
-	int	i;
-
-	i = 0;
-	while (i < ft_lstsize(lst))
-	{
-		if (((char *)ft_lst_get(lst, i)->content)[0] == c)
-			return (1);
-		i ++;
-	}
-	return (0);
-}
-
-/* removes all occurences of c in a t_list */
-void	ft_remove_chr_lst(t_list **lst, char c)
-{
-	int		i;
-
-	while (lst_has_c(*lst, c))
-	{
-		i = 0;
-		while (i < ft_lstsize(*lst))
-		{
-			if (((char *)ft_lst_get(*lst, i)->content)[0] == c)
-			{
-				ft_lst_rm(lst, i);
-				break ;
-			}
-			i ++;
-		}
-	}
+	return (ft_query_envp("PWD", envp));
 }

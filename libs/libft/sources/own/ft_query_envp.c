@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_remove_chr_lst.c                                :+:      :+:    :+:   */
+/*   ft_query_envp.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwikiera <jwikiera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,36 +12,26 @@
 
 #include "libft.h"
 
-static int	lst_has_c(t_list *lst, char c)
+char	*ft_query_envp(char *query, char **envp)
 {
-	int	i;
+	size_t	i;
+	char	*query_with_equal;
+	size_t	len;
 
+	query_with_equal = ft_strjoin_str_chr(query, '=');
+	if (!query_with_equal)
+		return (NULL);
+	len = ft_strlen(query_with_equal);
 	i = 0;
-	while (i < ft_lstsize(lst))
+	while (envp[i])
 	{
-		if (((char *)ft_lst_get(lst, i)->content)[0] == c)
-			return (1);
+		if (!ft_strncmp(envp[i], query_with_equal, ft_strlen(query_with_equal)))
+		{
+			free(query_with_equal);
+			return (ft_strdup(envp[i] + len));
+		}
 		i ++;
 	}
-	return (0);
-}
-
-/* removes all occurences of c in a t_list */
-void	ft_remove_chr_lst(t_list **lst, char c)
-{
-	int		i;
-
-	while (lst_has_c(*lst, c))
-	{
-		i = 0;
-		while (i < ft_lstsize(*lst))
-		{
-			if (((char *)ft_lst_get(*lst, i)->content)[0] == c)
-			{
-				ft_lst_rm(lst, i);
-				break ;
-			}
-			i ++;
-		}
-	}
+	free(query_with_equal);
+	return (NULL);
 }

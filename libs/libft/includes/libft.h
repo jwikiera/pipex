@@ -185,7 +185,10 @@ char		**ft_quote_split(const char *str, const char *set);
 /* second quote split attempt with proper escaping */
 char		**ft_quotesplit2(char *str);
 
-/* extracts PATHS as a NULL-terminates strarr from the global environ var */
+/* removes escape characters and non escaped special chars */
+int			clean_qt2splt(char ***splt);
+
+/* extracts PATHS as a NULL-terminated strarr from the global environ var */
 char		**ft_environ_to_path_strarr(char **envp);
 
 /* gets the full path of a binary, excluding local scripts */
@@ -212,6 +215,9 @@ char		ft_getsep(void);
 
 /* prepends a char to a string */
 char		*ft_strjoin_chr_str(char c, const char *str);
+
+/* appends a char to a string */
+char		*ft_strjoin_str_chr(const char *str, char c);
 
 /* checks if an executable exists at given command string */
 /* current execution dir excluded from PATH */
@@ -248,13 +254,25 @@ char		**ft_strarrjoin(char **arr1, char **arr2);
 char		**ft_prependstr2strarr(char *str, char **arr);
 
 /* if a char at a given pos is a valid escape char */
-int			ft_isescape(int	pos, char *str);
+int			ft_isescape(int pos, char *str);
 
 /* if char at given index in str is equal to given char */
 int			ft_chareq(int pos, char *str, char c);
 
 /* if a char at a position is escaped */
 int			ft_chr_escaped(int pos, char *str);
+
+/* if a char is situated between 2 of unsecaped given char */
+int			ft_insidequotes(int pos, char *str, char quote);
+
+/* gets given variable from envp. NULL if not found */
+char		*ft_query_envp(char *query, char **envp);
+
+/* ft_strncmp but ignores case */
+int			ft_istrncmp(const char *s1, const char *s2, size_t n);
+
+/* gets pwd based on given environ */
+char		*ft_pwd(char **envp);
 
 /* math */
 int			ft_min_int(int a, int b);

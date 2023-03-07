@@ -55,7 +55,7 @@ int	handle_bins(t_pipex *pipex)
 			errored = 1;
 			pi_error("command is empty", 0);
 		}
-		else if (!ft_command_ex_current(pipex->commands[i][0], environ))
+		else if (!ft_command_ex(pipex->commands[i][0], environ))
 		{
 			if (!printf_cmn_ntfnd(pipex->commands[i][0]))
 				return (1);

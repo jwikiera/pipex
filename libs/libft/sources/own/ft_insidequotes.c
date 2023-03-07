@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isescape.c                                      :+:      :+:    :+:   */
+/*   ft_insidequotes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwikiera <jwikiera@student.42lausan>       +#+  +:+       +#+        */
+/*   By: jwikiera <jwikiera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/20 11:12:16 by jwikiera          #+#    #+#             */
-/*   Updated: 2022/10/20 11:12:18 by jwikiera         ###   ########.fr       */
+/*   Created: 2022/10/11 11:46:56 by jwikiera          #+#    #+#             */
+/*   Updated: 2022/10/11 13:36:27 by jwikiera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	prebackcnt(int pos, char *str)
 	return (cnt);
 }
 
-static int	insidesinglequotes(int pos, char *str)
+int	ft_insidequotes(int pos, char *str, char quote)
 {
 	int	cursor;
 	int	first_single_found;
@@ -38,7 +38,7 @@ static int	insidesinglequotes(int pos, char *str)
 	second_single_found = 0;
 	while (cursor >= 0 && first_single_found == 0)
 	{
-		if (ft_chareq(cursor, str, '\'')
+		if (ft_chareq(cursor, str, quote)
 			&& prebackcnt(cursor, str) % 2 == 0)
 			first_single_found = 1;
 		cursor --;
@@ -52,17 +52,4 @@ static int	insidesinglequotes(int pos, char *str)
 		cursor ++;
 	}
 	return (first_single_found && second_single_found);
-}
-
-/* tells if a char at a given pos is a valid escape char */
-int	ft_isescape(int pos, char *str)
-{
-	int	backslash_cnt;
-
-	if (str[pos] != '\\')
-		return (0);
-	if (insidesinglequotes(pos, str))
-		return (0);
-	backslash_cnt = prebackcnt(pos, str);
-	return (backslash_cnt % 2 == 0);
 }

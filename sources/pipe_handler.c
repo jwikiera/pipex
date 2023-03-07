@@ -57,6 +57,8 @@ static void	handle_child_action(t_pipex *pipex, t_list *pipes, size_t i)
 	}
 	else if (i < pipex->commandc - 1)
 	{
+		//close(pipex->file1_fd);
+		//close(pipex->file2_fd);
 		if (!ft_lst_get(pipes, -2))
 			return ;
 		dup2(((int *)ft_lstlast(pipes)->content)[1], STDOUT_FILENO);
@@ -64,11 +66,12 @@ static void	handle_child_action(t_pipex *pipex, t_list *pipes, size_t i)
 	}
 	else
 	{
-		//dup2(pipex->file2_fd, STDOUT_FILENO);
+		//close(pipex->file1_fd);
+		dup2(pipex->file2_fd, STDOUT_FILENO);
 		dup2(((int *)ft_lstlast(pipes)->content)[0], STDIN_FILENO);
 	}
 	close_all_pipes(pipes);
-	if (i != 0 || (pipex->file1_fd != -1))
+	if (ft_command_ex(pipex->commands[i][0], environ) &&  (i != 0 || (pipex->file1_fd != -1)))
 	{
 		//fprintf(stderr, "executing %s with pid %d\n", pipex->commands[i][0], getpid());
 		execve(pipex->commands[i][0], pipex->commands[i], environ);
