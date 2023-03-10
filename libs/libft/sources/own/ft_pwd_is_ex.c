@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int	ft_pwd_is_ex(char *binname, char **envp)
+int	ft_pwd_is_ex(const char *binname, char **envp)
 {
 	char	*pwd;
 	char	*joined;

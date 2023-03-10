@@ -1,0 +1,31 @@
+TestCase(24, ['infile.txt', './script.sh', './script.sh', 'outfile.txt'],
+		             "The PATH variable does not exist with local scripts",
+		             path=None),
+
+ TestCase(26, ['infile.txt', 'cat', 'script.sh', 'outfile.txt'],
+		             "Should not match local script if it does not have a dot before the name"),
+
+TestCase(28, ['infile.txt', 'cat', 'uname', 'outfile.txt'],
+		             "Should search the command by the directory order in PATH",
+		             path=f"/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:{self.tests_dir}"),
+
+TestCase(35, ['here_doc', '"EOF"', 'cat', 'cat -e', 'no_file.txt'],
+		             "heredoc where output file does not exist",
+		             input="teste\nsome_str\nEOF\n"),
+		    TestCase(36, ['here_doc', '""', 'cat', 'cat -e', 'outfile.txt'],
+		             "heredoc with empty string, but multiple lines",
+		             input="teste\nsome_str\n\n"),
+		    TestCase(37, ['here_doc', '""', 'cat', 'cat -e', 'outfile.txt'],
+		             "heredoc with empty string, with only and enter",
+		             input="\n"),
+		    TestCase(38, ['here_doc', '"end of line"', 'cat', 'cat -e', 'outfile.txt'],
+		             "heredoc with empty string, with only and enter",
+		             input="bla\n\nEnd\nend of line\n"),
+		    TestCase(39, ['here_doc', 'EOF', 'cat', 'cat -e', 'outfile.txt'],
+		             "heredoc with EOF string, but with lines starting and ending in EOF",
+		             input="Teste\nEOFx\nEOF some\nx EOF\nEOF\n"),
+
+
+TestCase(42, ['here_doc', '"sleep 10"', "sleep 3", "sleep 1", 'outfile.txt'],
+			             'Should sleep for 3 seconds',
+			             input="EOF\nsleep 10\n")

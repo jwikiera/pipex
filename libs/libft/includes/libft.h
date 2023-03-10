@@ -275,7 +275,7 @@ int			ft_istrncmp(const char *s1, const char *s2, size_t n);
 char		*ft_pwd(char **envp);
 
 /* checks if exec is in current directory */
-int			ft_pwd_is_ex(char *binname, char **envp);
+int			ft_pwd_is_ex(const char *binname, char **envp);
 
 /* math */
 int			ft_min_int(int a, int b);

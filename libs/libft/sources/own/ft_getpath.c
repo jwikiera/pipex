@@ -59,7 +59,8 @@ static char	*get_abs(const char *binname, char **path_strarr, char **envp)
 	if (starts_with_cr(binname) && ft_file_isex(binname))
 		return (abs_local_ret(binname, envp));
 	//TODO: make function to check if pwd + basename is an executable. If yes, return NULL
-	if ()
+	if (ft_pwd_is_ex(binname, envp))
+		return (NULL);
 	else if (!starts_with_cr(binname) && ft_file_isex(binname))
 		return (ft_strdup(binname));
 	basename = ft_basename(binname);
