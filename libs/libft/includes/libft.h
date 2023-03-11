@@ -196,6 +196,7 @@ char		*ft_getpath(const char *binname, char **envp);
 
 /* ft_getpath but also searches current directory */
 /* [!] current dir scripts are not transformed in absolute paths */
+/* as we have no access to dirname, nothing gets absolute path except things in PATH */
 char		*ft_getpath_current(const char *binname, char **envp);
 
 /* checks if a binary is in the PATH */

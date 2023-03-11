@@ -83,7 +83,8 @@ static char	*get_abs(const char *binname, char **path_strarr, char **envp)
 /*
  * If available, returns the path of a given binary.
  * Current directory (./) is excluded.
- * Any other form of relative path is made absolute.
+ * ~~Any other form of relative path is made absolute.~~
+ * Well actually no, because we can't use `dirname`...
  * Ex: /usr/bin/../bin/ls -> /usr/bin/ls
  * */
 //TODO: apparently there is a leak here
@@ -95,6 +96,10 @@ char	*ft_getpath(const char *binname, char **envp)
 
 	if (!binname || !envp)
 		return (NULL);
+	if (!starts_with_cr(binname) && ft_pwd_is_ex(binname, envp) && ft_chr_in_str(ft_getsep(), binname))
+		return (ft_strdup(binname));
+	if (!starts_with_cr(binname) && ft_pwd_is_ex(binname, envp))
+		return (NULL);
 	path_strarr = ft_environ_to_path_strarr(envp);
 	if (!path_strarr)
 		return (NULL);
@@ -102,7 +107,7 @@ char	*ft_getpath(const char *binname, char **envp)
 		return (ft_strdup(binname));
 	if (/*!starts_with_cr(binname) &&*/ ft_file_isex(binname))
 	{
-		fprintf(stderr, "bruh: %s\n", binname);
+		//fprintf(stderr, "bruh: %s\n", binname);
 		return (get_abs(binname, path_strarr, envp));
 	}
 	if (starts_with_cr(binname) && !ft_file_isex(binname))

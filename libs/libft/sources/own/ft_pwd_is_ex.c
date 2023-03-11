@@ -18,9 +18,9 @@ int	ft_pwd_is_ex(const char *binname, char **envp)
 	char	*joined;
 
 	pwd = ft_pwd(envp);
-	if (pwd)
+	if (!pwd)
 		return (0);
-	joined = ft_joinpaths(pwd, binname);
+	joined = ft_joinpaths(pwd, binname, NULL);
 	if (!joined)
 	{
 		free(pwd);

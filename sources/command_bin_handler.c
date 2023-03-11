@@ -33,7 +33,8 @@ int	transform_bin(size_t i, t_pipex *pipex)
 		return (0);
 	free(pipex->commands[i][0]);
 	pipex->commands[i][0] = NULL;
-	pipex->commands[i][0] = ft_getpath_current(bak, environ);
+	//pipex->commands[i][0] = ft_getpath_current(bak, environ);
+	pipex->commands[i][0] = ft_getpath(bak, environ);
 	free(bak);
 	if (!pipex->commands[i][0])
 		return (0);
