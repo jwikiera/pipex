@@ -36,8 +36,8 @@ int	main(int argc, char *argv[])
 	pipex = init_pipex();
 	if (!pipex)
 		handle_exit("failed to initialize pipex struct\n", 1, NULL);
-	if (!arg_handle(argc, argv, pipex))
-		handle_exit("invalid arguments\n", 2, pipex);
+	if (arg_handle(argc, argv, pipex) < 1)
+		handle_exit(NULL, 1, pipex);
 	ret = 0;
 	//print_pipex(pipex);
 	if (pipex->is_heredoc)

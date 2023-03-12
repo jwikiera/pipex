@@ -49,7 +49,7 @@ static int	lst_add(const char *path, t_list **lst)
 	return (ft_lstadd_str(trimmed, lst));
 }
 
-char	*proxy_ret(t_list **lst)
+static char	*proxy_ret(t_list **lst)
 {
 	char	*res;
 

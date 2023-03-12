@@ -53,5 +53,6 @@ char	**parse_command(char *command);
 int		pi_error(char *msg, int ret);
 char	*get_heredoc_tempfile(void);
 int		handle_files_heredoc(const char *fname1, t_pipex *pipex);
+int		hrdceq(const char *str, const char *limiter);
 
 #endif

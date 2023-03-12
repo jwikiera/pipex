@@ -278,6 +278,12 @@ char		*ft_pwd(char **envp);
 /* checks if exec is in current directory */
 int			ft_pwd_is_ex(const char *binname, char **envp);
 
+/* joins arbitrary amount of strings */
+char		*ft_strjoin2(const char *word, ...);
+
+/* performs two strncmps with both string lengths */
+int			ft_strequal(const char *s1, const char *s2);
+
 /* math */
 int			ft_min_int(int a, int b);
 int			ft_max_int(int a, int b);

@@ -57,8 +57,6 @@ static void	handle_child_action(t_pipex *pipex, t_list *pipes, size_t i)
 	}
 	else if (i < pipex->commandc - 1)
 	{
-		//close(pipex->file1_fd);
-		//close(pipex->file2_fd);
 		if (!ft_lst_get(pipes, -2))
 			return ;
 		dup2(((int *)ft_lstlast(pipes)->content)[1], STDOUT_FILENO);
@@ -66,7 +64,6 @@ static void	handle_child_action(t_pipex *pipex, t_list *pipes, size_t i)
 	}
 	else
 	{
-		//close(pipex->file1_fd);
 		dup2(pipex->file2_fd, STDOUT_FILENO);
 		dup2(((int *)ft_lstlast(pipes)->content)[0], STDIN_FILENO);
 	}

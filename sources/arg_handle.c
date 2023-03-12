@@ -26,8 +26,8 @@ static int	heredoc_arg_handle(int argc, char *argv[], t_pipex *pipex)
 	pipex->commands = malloc(sizeof(*pipex->commands) * 2);
 	if (!pipex->commands)
 		return (0);
-	pipex->commands[0] = parse_command(argv[3]);
-	pipex->commands[1] = parse_command(argv[4]);
+	pipex->commands[0] = ft_quotesplit2(argv[3]);
+	pipex->commands[1] = ft_quotesplit2(argv[4]);
 	if (!pipex->commands[0] || !pipex->commands[1])
 		return (0);
 	if (!handle_bins(pipex))

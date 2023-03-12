@@ -70,7 +70,8 @@ SOURCES_LIST			:= main.c\
 							del_node.c\
 							pi_error.c\
 							get_heredoc_tempfile.c\
-							command_bin_handler.c
+							command_bin_handler.c\
+							heredoc_equal.c
 HEADER_LIST				:= pipex.h
 HEADER_FILES			:= $(addprefix $(INCLUDE_DIR), $(HEADER_LIST))
 

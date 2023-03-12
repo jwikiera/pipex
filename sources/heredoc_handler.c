@@ -24,8 +24,7 @@ static int	read_stdin(t_pipex *pipex)
 		if (!read)
 			return (pi_error("warning: here-document "
 					"delimited by end-of-file", 1));
-		if (!ft_strncmp(pipex->heredoc_lim, read,
-				ft_strlen(pipex->heredoc_lim)))
+		if (hrdceq(read, pipex->heredoc_lim))
 		{
 			free(read);
 			return (1);
@@ -96,6 +95,8 @@ int	handle_heredoc(t_pipex *pipex)
 	close(p[1]);
 	ret_status = 0;
 	wait(&ret_status);
+	//fprintf(stderr, "ret after 1st child: %d\n", ret_status);
 	wait(&ret_status);
-	return (ret(ret_status == 0, pipex));
+	//fprintf(stderr, "ret after 2st child: %d\n", ret_status);
+	return (ret(ret_status, pipex));
 }
