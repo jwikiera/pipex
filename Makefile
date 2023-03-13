@@ -66,7 +66,6 @@ SOURCES_LIST			:= main.c\
 							pipe_handler.c\
 							pipe_handler_ret.c\
 							heredoc_handler.c\
-							parse_command.c\
 							del_node.c\
 							pi_error.c\
 							get_heredoc_tempfile.c\

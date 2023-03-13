@@ -14,8 +14,14 @@
 
 static int	spcchr(char c)
 {
-	//return (c == '\'' || c == '"' || ft_isspace(c) || c == '\\');
 	return (c == '\'' || c == '"' || c == '\\');
+}
+
+static int	last_if(char *str, int i, t_list **word)
+{
+	return ((!spcchr(str[i]) || ft_insidequotes(i, str, '\'')
+			|| ft_insidequotes(i, str, '"'))
+		&& !ft_lstadd_chr(str[i], word));
 }
 
 char	*replace_escapes(char *str)
@@ -23,7 +29,6 @@ char	*replace_escapes(char *str)
 	t_list	*word;
 	int		i;
 	int		previous_was_bckslsh;
-	char	*res;
 
 	word = NULL;
 	i = 0;
@@ -33,24 +38,16 @@ char	*replace_escapes(char *str)
 		if (spcchr(str[i]) && previous_was_bckslsh)
 		{
 			if (!ft_lstadd_chr(str[i], &word))
-			{
-				ft_lstclear(&word, ft_delnode);
-				return (0);
-			}
+				return (ft_qtsplt2_ret(&word, NULL));
 			previous_was_bckslsh = 0;
 		}
 		else if (str[i] == '\\' && !previous_was_bckslsh)
 			previous_was_bckslsh = 1;
-		else if ((!spcchr(str[i]) || ft_insidequotes(i, str, '\'') || ft_insidequotes(i, str, '"')) && !ft_lstadd_chr(str[i], &word))
-		{
-			ft_lstclear(&word, ft_delnode);
-			return (0);
-		}
+		else if (last_if(str, i, &word))
+			return (ft_qtsplt2_ret(&word, NULL));
 		i ++;
 	}
-	res = ft_tlst_to_str(word);
-	ft_lstclear(&word, ft_delnode);
-	return (res);
+	return (ft_qtsplt2_ret(&word, ft_tlst_to_str(word)));
 }
 
 static int	clean_ret(char ***splt, t_list **nsplt, int success)

@@ -180,10 +180,12 @@ int			ft_lstadd_chr(char c, t_list **lst);
 int			ft_lstadd_str(char *str, t_list **lst);
 
 /* splits a string according to given set of quotes, also handles backslashes */
-char		**ft_quote_split(const char *str, const char *set);
+/* Removed */
+/* char		**ft_quote_split(const char *str, const char *set);*/
 
 /* second quote split attempt with proper escaping */
 char		**ft_quotesplit2(char *str);
+char		*ft_qtsplt2_ret(t_list **word, char *res);
 
 /* removes escape characters and non escaped special chars */
 int			clean_qt2splt(char ***splt);
@@ -193,10 +195,13 @@ char		**ft_environ_to_path_strarr(char **envp);
 
 /* gets the full path of a binary, excluding local scripts */
 char		*ft_getpath(const char *binname, char **envp);
+char		*ft_getpath_ret(char **path_strarr, size_t i, const char *binname);
+int			ft_getpath_null_check(const char *binname, char **envp);
 
 /* ft_getpath but also searches current directory */
 /* [!] current dir scripts are not transformed in absolute paths */
-/* as we have no access to dirname, nothing gets absolute path except things in PATH */
+/* as we have no access to dirname, nothing gets absolute path
+ * except things in PATH */
 char		*ft_getpath_current(const char *binname, char **envp);
 
 /* checks if a binary is in the PATH */

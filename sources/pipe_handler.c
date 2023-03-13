@@ -68,11 +68,9 @@ static void	handle_child_action(t_pipex *pipex, t_list *pipes, size_t i)
 		dup2(((int *)ft_lstlast(pipes)->content)[0], STDIN_FILENO);
 	}
 	close_all_pipes(pipes);
-	if (ft_command_ex(pipex->commands[i][0], environ) &&  (i != 0 || (pipex->file1_fd != -1)))
-	{
-		//fprintf(stderr, "executing %s with pid %d\n", pipex->commands[i][0], getpid());
+	if (ft_command_ex(pipex->commands[i][0], environ)
+		&& (i != 0 || (pipex->file1_fd != -1)))
 		execve(pipex->commands[i][0], pipex->commands[i], environ);
-	}
 	exit(127);
 }
 

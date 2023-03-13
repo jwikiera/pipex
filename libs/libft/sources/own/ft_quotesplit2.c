@@ -19,7 +19,8 @@ static int	end_of_word(char c, char *s, int i)
 		&& !ft_chr_escaped(i, s));
 }
 
-static int	next_token_ret(t_list **word, char **child_content, int len, int succeeded)
+static int	next_token_ret(t_list **word, char **child_content,
+							int len, int succeeded)
 {
 	char	*tmp;
 

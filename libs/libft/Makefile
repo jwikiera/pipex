@@ -107,13 +107,13 @@ SRCS_OWN_LIST		:= ft_str_starts_ends_with.c\
 						ft_isblankstr.c\
 						ft_splitset.c\
 						ft_chr_in_str.c\
-						ft_quote_split.c\
 						ft_tlst_to_str.c\
 						del_node.c\
 						ft_lstadd_chr.c\
 						ft_lstadd_str.c\
 						ft_environ_to_path_strarr.c\
 						ft_getpath.c\
+						ft_getpath_util.c\
 						ft_getpath_current.c\
 						ft_bin_in_path.c\
 						ft_file_exists.c\
@@ -139,6 +139,7 @@ SRCS_OWN_LIST		:= ft_str_starts_ends_with.c\
 						ft_chr_escaped.c\
 						ft_quotesplit2.c\
 						ft_quotesplit2_utils.c\
+						ft_quotesplit2_utils2.c\
 						ft_insidequotes.c\
 						ft_pwd.c\
 						ft_query_envp.c\

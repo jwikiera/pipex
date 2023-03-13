@@ -34,7 +34,6 @@ int	handle_files_heredoc(const char *fname1, t_pipex *pipex)
 	pipex->file1_fd = fd_file1(fname1);
 	if (pipex->file1_fd == -1)
 	{
-		//ft_putstr_fd("Failed to get file descriptor for file1\n", 2);
 		joined = ft_strjoin2("failed to open: ", fname1, "\n", NULL);
 		if (!joined)
 			return (0);

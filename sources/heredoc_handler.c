@@ -95,8 +95,6 @@ int	handle_heredoc(t_pipex *pipex)
 	close(p[1]);
 	ret_status = 0;
 	wait(&ret_status);
-	//fprintf(stderr, "ret after 1st child: %d\n", ret_status);
 	wait(&ret_status);
-	//fprintf(stderr, "ret after 2st child: %d\n", ret_status);
 	return (ret(ret_status, pipex));
 }

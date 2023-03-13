@@ -46,22 +46,14 @@ static int	pipe_arg_handle(int argc, char *argv[], t_pipex *pipex)
 		return (pi_error("failed to malloc pipex->commands.\n", 1));
 	i = 2;
 	pipex->commandc = 0;
-	//fprintf(fopen("/Users/jwikiera/Projets/pipex/arglog.txt", "a"), "---------\n");
 	while (i < argc - 1)
 	{
-		///////pipex->commands[i - 2] = parse_command(argv[i]);
-		//fprintf(stderr, "argv[%d]: %s\n", i, argv[i]);
 		pipex->commands[i - 2] = ft_quotesplit2(argv[i]);
-		//fprintf(fopen("/Users/jwikiera/Projets/pipex/arglog.txt", "a"), "argv[%d]: %s\n", i, argv[i]);
-		//fprintf(stderr, "argv[%d]: %s\n", i, argv[i]);
-		//fprintf(stdout, "strarr of parsed (len of array is %zu): \n", ft_strarrlen(pipex->commands[i - 2]));
-		//ft_println_strarr(pipex->commands[i - 2], 0, 1);
 		if (!pipex->commands[i - 2])
 			return (0);
 		i ++;
 		pipex->commandc ++;
 	}
-	//exit(69);
 	return (handle_bins(pipex));
 }
 

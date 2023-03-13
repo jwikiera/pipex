@@ -58,7 +58,6 @@ static char	*get_abs(const char *binname, char **path_strarr, char **envp)
 
 	if (starts_with_cr(binname) && ft_file_isex(binname))
 		return (abs_local_ret(binname, envp));
-	//TODO: make function to check if pwd + basename is an executable. If yes, return NULL
 	if (ft_pwd_is_ex(binname, envp))
 		return (NULL);
 	else if (!starts_with_cr(binname) && ft_file_isex(binname))
@@ -87,40 +86,25 @@ static char	*get_abs(const char *binname, char **path_strarr, char **envp)
  * Well actually no, because we can't use `dirname`...
  * Ex: /usr/bin/../bin/ls -> /usr/bin/ls
  * */
-//TODO: apparently there is a leak here
 char	*ft_getpath(const char *binname, char **envp)
 {
 	char	**path_strarr;
-	char	*full_path;
 	size_t	i;
 
-	if (!binname || !envp)
+	if (!ft_getpath_null_check(binname, envp))
 		return (NULL);
-	if (!starts_with_cr(binname) && ft_pwd_is_ex(binname, envp) && ft_chr_in_str(ft_getsep(), binname))
+	else if (ft_getpath_null_check(binname, envp) == 2)
 		return (ft_strdup(binname));
-	if (!starts_with_cr(binname) && ft_pwd_is_ex(binname, envp))
-		return (NULL);
 	path_strarr = ft_environ_to_path_strarr(envp);
 	if (!path_strarr)
 		return (NULL);
-	if (ft_str_startswith(binname, "/") && ft_file_isex(binname))
-		return (ft_strdup(binname));
-	if (/*!starts_with_cr(binname) &&*/ ft_file_isex(binname))
-	{
-		//fprintf(stderr, "bruh: %s\n", binname);
+	if (ft_file_isex(binname))
 		return (get_abs(binname, path_strarr, envp));
-	}
-	if (starts_with_cr(binname) && !ft_file_isex(binname))
-		return (NULL);
 	i = 0;
 	while (path_strarr[i])
 	{
 		if (ft_bin_in_path(binname, path_strarr[i]))
-		{
-			full_path = ft_joinpaths(path_strarr[i], binname, NULL);
-			free_path_strarr(path_strarr, NULL);
-			return (full_path);
-		}
+			return (ft_getpath_ret(path_strarr, i, binname));
 		i ++;
 	}
 	return (free_path_strarr(path_strarr, NULL));
